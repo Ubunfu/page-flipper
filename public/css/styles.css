@@ -4,6 +4,11 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
+body a {
+    text-decoration: none;
+    color: #444;
+}
+
 .splash {
     margin: 50px 0;
     text-align: center;
@@ -16,4 +21,73 @@ body {
 
 .splash .sub-title {
     font-size: 18px;
+}
+
+.splash .auth-buttons {
+    padding: 35px 0;
+}
+
+.splash .auth-buttons span {
+    background-color: #060;
+    padding: 15px 10px 12px 10px;
+    margin: 0 5px;
+    border-radius: 10px;
+}
+
+.splash .auth-buttons a {
+    color: white;
+    font-size: 24px;
+}
+
+header {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 25px 0;
+    border-bottom: 1px solid #444;
+}
+
+header .title {
+    font-size: 34px;
+}
+
+.signup-form {
+    margin: 0 auto;
+    padding-top: 75px;
+    text-align: center;
+}
+
+.signup-greeting {
+    text-align: center;
+    font-size: 24px;
+}
+
+.signup-form form {
+    margin: 40px 0;
+}
+
+.signup-form input {
+    font-size: 16px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.login-form {
+    margin: 0 auto;
+    padding-top: 75px;
+    text-align: center;
+}
+
+.login-greeting {
+    text-align: center;
+    font-size: 24px;
+}
+
+.login-form form {
+    margin: 40px 0;
+}
+
+.login-form input {
+    font-size: 16px;
+    width: 90%;
+    max-width: 400px;
 }
