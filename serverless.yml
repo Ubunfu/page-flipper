@@ -1,0 +1,10 @@
+component: express
+
+app: page-flipper
+org: ryanallen
+name: page-flipper
+f
+inputs:
+  src: ./
+  description: page-flipper web app
+  region: us-east-1

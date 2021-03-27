@@ -1,0 +1,19 @@
+body {
+    color: #333;
+    background-color: antiquewhite;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.splash {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.splash .title {
+    font-size: 80px;
+    padding: 36px 0;
+}
+
+.splash .sub-title {
+    font-size: 18px;
+}
