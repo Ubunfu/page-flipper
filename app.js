@@ -13,6 +13,8 @@ const partialsPath = path.join(__dirname, './views/partials')
 
 const app = express();
 app.set('view engine', 'hbs')
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 hbs.registerPartials(partialsPath)
 app.use(express.static(staticsPath))
 app.use(session({

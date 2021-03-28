@@ -14,15 +14,35 @@
         <form action="/signup" method="POST">
             <p>
                 <input type="text" name="firstName" id="" placeholder="First Name">
+                {{#if invalidFirstName}}
+                    <br><span class="invalid-input">Name must be alphabetic!</span>
+                {{/if}}
             </p>
             <p>
                 <input type="text" name="lastName" id="" placeholder="Last Name">
+                {{#if invalidLastName}}
+                    <br><span class="invalid-input">Name must be alphabetic!</span>
+                {{/if}}
             </p>
             <p>
                 <input type="email" name="email" id="" placeholder="Email Address">
+                {{#if invalidEmail}}
+                    <br><span class="invalid-input">Invalid email address!</span>
+                {{/if}}
             </p>
             <p>
                 <input type="password" name="password" id="" placeholder="Desired Password">
+                {{#if invalidPassword}}
+                    <br><div class="invalid-input">
+                        Password must have:
+                        <ul>
+                            <li>8+ characters</li>
+                            <li>1+ Upper-case characters</li>
+                            <li>1+ Lower-case characters</li>
+                            <li>1+ Number</li>
+                        </ul>
+                    </div>
+                {{/if}}
             </p>
             <p>
                 <input type="submit" value="Sign Up">
