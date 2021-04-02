@@ -1,0 +1,15 @@
+component: aws-dynamodb
+
+name: pf-user-database
+
+inputs:
+  name: ${name}-${stage}
+  region: us-east-1
+  deletionPolicy: delete
+  attributeDefinitions:
+    - AttributeName: email
+      AttributeType: S
+  keySchema:
+    - AttributeName: email
+      KeyType: HASH
+
