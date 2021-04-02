@@ -10,3 +10,5 @@ Page Flipper is a place dedicated to enjoying your favorite books together with 
   * `string`
 * `SESSION_EXP_MS`: The life-span of a new access token in milliseconds.
   * `number`
+* `DOMAIN`: Domain to register in front of the site
+  * `string`

@@ -8,6 +8,7 @@ inputs:
   src: ./
   description: page-flipper web app
   region: us-east-1
+  domain: ${env:DOMAIN}
   env:
     LISTEN: ${env:LISTEN}
     LISTEN_PORT: ${env:LISTEN_PORT}
