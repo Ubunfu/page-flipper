@@ -25,9 +25,9 @@ app.use(session({
 app.use(routers.main)
 app.use(routers.auth)
 
-if (process.env.LOCAL == 'true') {
-  app.listen(process.env.LOCAL_PORT, () => {
-      console.log('Server is up!');
+if (process.env.LISTEN == 'true') {
+  app.listen(process.env.LISTEN_PORT, () => {
+      console.log('Page Flipper is up!');
   })
 }
 

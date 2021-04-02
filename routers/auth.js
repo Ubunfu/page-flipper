@@ -1,5 +1,5 @@
 const express = require('express')
-const { validators } = require('../auth')
+const { session, validators } = require('../auth')
 const router = express.Router()
 
 router.get('/signup', (req, res) => {
@@ -20,6 +20,7 @@ router.post('/signup', async (req, res) => {
     if (invalidFields.length != 0) {
         return res.redirect(`/signup?errors=${invalidFields}`)
     }
+    await session.createSession(req)
     res.redirect('/')
 })
 

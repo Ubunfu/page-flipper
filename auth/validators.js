@@ -4,9 +4,7 @@ async function findInvalidSignupFields(req) {
     const fName = req.body.firstName + ''
     const lName = req.body.lastName + ''
     const email = req.body.email + ''
-    const pass = req.body.passwords + ''
-
-    console.log(req.body);
+    const pass = req.body.password + ''
 
     let invalidFields = []
 
@@ -54,11 +52,13 @@ async function validateEmail(email) {
 }
 
 async function validatePassword(password) {
+    // defaults need to be overridden
     if (!validator.isStrongPassword(password, {
         minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1
+        minLowercase: 0,
+        minUppercase: 0,
+        minNumbers: 0,
+        minSymbols: 0
     })) {
         throw new Error('invalid_input')
     }
