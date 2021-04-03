@@ -11,6 +11,8 @@ router.get('/signup', (req, res) => {
             invalidEmail: invalidFields.includes('email'),
             invalidPassword: invalidFields.includes('password')
          })
+    } if (req.session.token) {
+        return res.redirect('/')
     }
     return res.render('signup', {})
 })
@@ -25,11 +27,23 @@ router.post('/signup', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
+    if (req.query.error && req.query.error === 'unauthorized') {
+        return res.render('login', {
+            unauthorized: true
+        })
+    } if (req.session.token) {
+        return res.redirect('/')
+    }
     return res.render('login', {})
 })
 
-router.post('/login', (req, res) => {
-    // TODO
+router.post('/login', async (req, res) => {
+    try {
+        await auth.authenticateUser(req)
+    } catch (error) {
+        return res.redirect('/login?error=unauthorized')
+    }
+    return res.redirect('/')
 })
 
 module.exports = router

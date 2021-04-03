@@ -71,11 +71,11 @@ header .title {
     max-width: 400px;
 }
 
-.signup-form .invalid-input {
+.invalid-input {
     color: #F44;
 }
 
-.signup-form .invalid-input ul {
+.invalid-input ul {
     list-style-type: none;
 }
 

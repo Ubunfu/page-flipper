@@ -13,11 +13,14 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 async function getUserByEmail(email) {
     const config = {
         TableName: process.env.TABLE_USERS,
-        Key: {
-            HashKey: email
-        }
+        Key: { email }
     }
-    return await docClient.get(config).promise()
+    const user = await docClient.get(config).promise()
+    if (!user.Item) {
+        console.error(`user with email ${email} not found`);
+        throw new Error('user_not_found')
+    }
+    return user.Item
 }
 
 /**
