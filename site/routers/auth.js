@@ -1,8 +1,8 @@
 const express = require('express')
-const { validators, auth } = require('../security')
+const { validators, auth, session } = require('../security')
 const router = express.Router()
 
-router.get('/signup', (req, res) => {
+router.get('/signup', async (req, res) => {
     if (req.query.errors) {
         const invalidFields = req.query.errors.split(',')
         return res.render('signup', { 
@@ -11,8 +11,9 @@ router.get('/signup', (req, res) => {
             invalidEmail: invalidFields.includes('email'),
             invalidPassword: invalidFields.includes('password')
          })
-    } if (req.session.token) {
-        return res.redirect('/')
+    }
+    if (req.session.token) {
+        return res.redirect('/dashboard')
     }
     return res.render('signup', {})
 })
@@ -31,8 +32,9 @@ router.get('/login', (req, res) => {
         return res.render('login', {
             unauthorized: true
         })
-    } if (req.session.token) {
-        return res.redirect('/')
+    } 
+    if (req.session.token) {
+        return res.redirect('/dashboard')
     }
     return res.render('login', {})
 })

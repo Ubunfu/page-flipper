@@ -34,13 +34,7 @@
                 <input type="password" name="password" id="" placeholder="Desired Password">
                 {{#if invalidPassword}}
                     <br><div class="invalid-input">
-                        Password must have:
-                        <ul>
-                            <li>8+ characters</li>
-                            <li>1+ Upper-case characters</li>
-                            <li>1+ Lower-case characters</li>
-                            <li>1+ Number</li>
-                        </ul>
+                        Password must have at least 8 characters
                     </div>
                 {{/if}}
             </p>

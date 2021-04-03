@@ -3,20 +3,19 @@ const router = express.Router()
 const { session } = require('../security')
 
 router.get('/', async (req, res) => {
-    try {
-        await session.validateSession(req)
+    if (req.session.token) {
         return res.redirect('/dashboard')
-    } catch (error) {
-        return res.render('index', {})
     }
+    return res.render('index', {})
 })
 
 router.get('/dashboard', async (req, res) => {
+    // return res.render('dashboard', {})
     try {
         await session.validateSession(req)
         return res.render('dashboard', {})
     } catch (error) {
-        return res.redirect('/')
+        return res.redirect('/login')
     }
 })
 
