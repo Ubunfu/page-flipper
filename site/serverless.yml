@@ -14,3 +14,5 @@ inputs:
     LISTEN_PORT: ${env:LISTEN_PORT}
     SESSION_SECRET: ${env:SESSION_SECRET}
     SESSION_EXP_MS: ${env:SESSION_EXP_MS}
+    TABLE_USERS: ${output:pf-user-database.name}
+    TABLE_USERS_REGION: ${output:pf-user-database.region}

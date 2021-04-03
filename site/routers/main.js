@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { session } = require('../auth')
+const { session } = require('../security')
 
 router.get('/', async (req, res) => {
     try {

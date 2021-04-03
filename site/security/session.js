@@ -4,7 +4,6 @@ async function createSession(req) {
     const tokenPayload = { subject: req.body.email }
     const token = await createToken(tokenPayload)
     req.session.token = token
-    console.log(req.session);
 }
 
 async function validateSession(req) {
