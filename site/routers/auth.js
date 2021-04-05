@@ -1,18 +1,21 @@
 const express = require('express')
-const { validators, auth } = require('../security')
+const { user } = require('../model')
+const { validators, auth, session } = require('../security')
 const router = express.Router()
 
-router.get('/signup', (req, res) => {
+router.get('/signup', async (req, res) => {
     if (req.query.errors) {
-        const invalidFields = req.query.errors.split(',')
+        const errors = req.query.errors.split(',')
         return res.render('signup', { 
-            invalidFirstName: invalidFields.includes('firstName'),
-            invalidLastName: invalidFields.includes('lastName'),
-            invalidEmail: invalidFields.includes('email'),
-            invalidPassword: invalidFields.includes('password')
+            invalidFirstName: errors.includes('firstName'),
+            invalidLastName: errors.includes('lastName'),
+            invalidEmail: errors.includes('email'),
+            invalidPassword: errors.includes('password'),
+            idRegistered: errors.includes('id_registered')
          })
-    } if (req.session.token) {
-        return res.redirect('/')
+    }
+    if (req.session.token) {
+        return res.redirect('/dashboard')
     }
     return res.render('signup', {})
 })
@@ -22,26 +25,31 @@ router.post('/signup', async (req, res) => {
     if (invalidFields.length != 0) {
         return res.redirect(`/signup?errors=${invalidFields}`)
     }
+    if (await user.getUserByEmail(req.body.email)) {
+        return res.redirect(`/signup?errors=id_registered`)
+    }
     await auth.registerUser(req)
     return res.redirect('/')
 })
 
-router.get('/login', (req, res) => {
-    if (req.query.error && req.query.error === 'unauthorized') {
+router.get('/login', async (req, res) => {
+    try {
+        await session.validateSession(req)
+        return res.redirect('/dashboard')
+    } catch (error) {
+        console.error(error);
         return res.render('login', {
-            unauthorized: true
+            invalidCredentials: (req.query.error && req.query.error === 'invalid_credentials'),
+            sessionExpired: (req.session.token ? true : false)
         })
-    } if (req.session.token) {
-        return res.redirect('/')
     }
-    return res.render('login', {})
 })
 
 router.post('/login', async (req, res) => {
     try {
         await auth.authenticateUser(req)
     } catch (error) {
-        return res.redirect('/login?error=unauthorized')
+        return res.redirect('/login?error=invalid_credentials')
     }
     return res.redirect('/')
 })

@@ -19,22 +19,30 @@ body a {
     padding: 36px 0;
 }
 
-.splash .sub-title {
+.splash .sub-title,
+.no-clubs {
     font-size: 18px;
 }
 
-.splash .auth-buttons {
+.club-buttons {
+    text-align: center;
+}
+
+.splash .auth-buttons,
+.club-buttons {
     padding: 35px 0;
 }
 
-.splash .auth-buttons span {
+.splash .auth-buttons span,
+.club-buttons span {
     background-color: #060;
     padding: 10px;
     margin: 0 5px;
     border-radius: 10px;
 }
 
-.splash .auth-buttons a {
+.splash .auth-buttons a,
+.club-buttons a {
     color: white;
     font-size: 24px;
 }
@@ -98,4 +106,63 @@ header .title {
     font-size: 16px;
     width: 90%;
     max-width: 400px;
+}
+
+.nav-main {
+    font-size: 20px;
+    padding: 32px 0;
+    display: flex;
+    text-align: center;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.nav-main a {
+    flex: auto;
+}
+
+.main-content {
+    max-width: 750px;
+    width: 100%;
+    margin: 26px auto 0 auto;
+}
+
+.no-clubs {
+    text-align: center;
+}
+
+.club-grid {
+    display: grid;
+    gap: 16px;
+    grid-auto-columns: auto;
+}
+
+.club-list-title {
+    font-size: 24px;
+    padding-bottom: 36px;
+    text-align: center;
+}
+
+.club {
+    font-size: 18px;
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #444;
+    border-bottom: 1px solid #444;
+    padding: 16px 0;
+    display: flex;
+}
+
+.club .club-icon img {
+    padding: 0 16px;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.club .club-metadata {
+    padding: 0 16px;
+}
+
+.club .club-name {
+    font-size: 24px;
 }

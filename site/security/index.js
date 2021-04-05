@@ -7,5 +7,5 @@ module.exports = {
     validators,
     session,
     auth,
-    hash
+    hash,
 }

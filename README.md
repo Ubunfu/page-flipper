@@ -23,3 +23,6 @@ Page Flipper is a place dedicated to enjoying your favorite books together with 
 * `TABLE_USERS_REGION`: AWS region of the `TABLE_USERS` DynamoDB table
   * Type: `string`
   * Default: Region of the table created by the Serverless framework
+* `TABLE_CLUBS`: The DynamoDB table name to use for storing club data
+  * Type: `string`
+  * Default: Name of the table created by the Serverless framework

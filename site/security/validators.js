@@ -65,5 +65,5 @@ async function validatePassword(password) {
 }
 
 module.exports = {
-    findInvalidSignupFields
+    findInvalidSignupFields,
 }

@@ -29,18 +29,15 @@
                 {{#if invalidEmail}}
                     <br><span class="invalid-input">Invalid email address!</span>
                 {{/if}}
+                {{#if idRegistered}}
+                    <br><span class="invalid-input">ID has already been registered!</span>
+                {{/if}}
             </p>
             <p>
                 <input type="password" name="password" id="" placeholder="Desired Password">
                 {{#if invalidPassword}}
                     <br><div class="invalid-input">
-                        Password must have:
-                        <ul>
-                            <li>8+ characters</li>
-                            <li>1+ Upper-case characters</li>
-                            <li>1+ Lower-case characters</li>
-                            <li>1+ Number</li>
-                        </ul>
+                        Password must have at least 8 characters
                     </div>
                 {{/if}}
             </p>

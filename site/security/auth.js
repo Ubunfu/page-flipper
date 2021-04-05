@@ -21,5 +21,5 @@ async function registerUser(req) {
 
 module.exports = {
     authenticateUser,
-    registerUser
+    registerUser,
 }

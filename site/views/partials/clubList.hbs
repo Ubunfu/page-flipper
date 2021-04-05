@@ -1,0 +1,18 @@
+<div class="club-list">
+    <div class="club-list-title">Your Book Clubs:</div>
+    <div class="club-grid">
+        {{#each clubs}}
+            <a href="/club/{{id}}">
+                <div class="club">
+                    <div class="club-icon">
+                        <img src="{{iconUrl}}" alt="">
+                    </div>
+                    <div class="club-metadata">
+                        <div class="club-name">{{name}}</div>
+                        <div class="club-description">{{description}}</div>
+                    </div>
+                </div>
+            </a>
+        {{/each}}
+    </div>
+</div>
