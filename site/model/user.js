@@ -1,6 +1,6 @@
-const AWS = require('aws-sdk');
 const hash = require('../security/hash')
 const session = require('../security/session')
+const AWS = require('aws-sdk');
 AWS.config.update({
     region: process.env.TABLE_USERS_REGION
 })

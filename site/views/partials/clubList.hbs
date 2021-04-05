@@ -4,11 +4,11 @@
         {{#each clubs}}
             <div class="club">
                 <div class="club-icon">
-                    <img src="https://jwt.io/img/pic_logo.svg" alt="">
+                    <img src="{{iconUrl}}" alt="">
                 </div>
                 <div class="club-metadata">
                     <div class="club-name">{{name}}</div>
-                    <div class="club-members">{{members}} members</div>
+                    <div class="club-description">{{description}}</div>
                 </div>
             </div>
         {{/each}}
