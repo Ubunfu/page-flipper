@@ -29,6 +29,9 @@
                 {{#if invalidEmail}}
                     <br><span class="invalid-input">Invalid email address!</span>
                 {{/if}}
+                {{#if idRegistered}}
+                    <br><span class="invalid-input">ID has already been registered!</span>
+                {{/if}}
             </p>
             <p>
                 <input type="password" name="password" id="" placeholder="Desired Password">
