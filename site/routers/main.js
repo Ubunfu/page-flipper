@@ -1,4 +1,5 @@
 const express = require('express')
+const { user } = require('../model')
 const router = express.Router()
 const { session } = require('../security')
 
@@ -10,13 +11,17 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/dashboard', async (req, res) => {
-    // return res.render('dashboard', {})
     try {
         await session.validateSession(req)
-        return res.render('dashboard', {})
     } catch (error) {
         return res.redirect('/login')
     }
+    const clubs = await user.getUserByToken(req.session.token).clubs
+    
+    return res.render('dashboard', {
+        hasClubs: (clubs && clubs.length > 0 ? true : false),
+        clubs: clubs
+    })
 })
 
 module.exports = router

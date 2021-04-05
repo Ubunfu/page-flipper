@@ -1,0 +1,16 @@
+<div class="club-list">
+    <div class="club-list-title">Your Book Clubs:</div>
+    <div class="club-grid">
+        {{#each clubs}}
+            <div class="club">
+                <div class="club-icon">
+                    <img src="https://jwt.io/img/pic_logo.svg" alt="">
+                </div>
+                <div class="club-metadata">
+                    <div class="club-name">{{name}}</div>
+                    <div class="club-members">{{members}} members</div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

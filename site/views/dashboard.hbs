@@ -10,5 +10,12 @@
 <body>
     {{>header}}
     {{>navBar}}
+    <div class="main-content">
+        {{#if hasClubs}}
+            {{>clubList}}
+        {{else}}
+            {{>noClubs}}
+        {{/if}}
+    </div>
 </body>
 </html>
