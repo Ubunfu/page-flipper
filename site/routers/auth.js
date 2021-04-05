@@ -27,23 +27,24 @@ router.post('/signup', async (req, res) => {
     return res.redirect('/')
 })
 
-router.get('/login', (req, res) => {
-    if (req.query.error && req.query.error === 'unauthorized') {
-        return res.render('login', {
-            unauthorized: true
-        })
-    } 
-    if (req.session.token) {
+router.get('/login', async (req, res) => {
+    try {
+        await session.validateSession(req)
         return res.redirect('/dashboard')
+    } catch (error) {
+        console.error(error);
+        return res.render('login', {
+            invalidCredentials: (req.query.error && req.query.error === 'invalid_credentials'),
+            sessionExpired: (req.session.token ? true : false)
+        })
     }
-    return res.render('login', {})
 })
 
 router.post('/login', async (req, res) => {
     try {
         await auth.authenticateUser(req)
     } catch (error) {
-        return res.redirect('/login?error=unauthorized')
+        return res.redirect('/login?error=invalid_credentials')
     }
     return res.redirect('/')
 })

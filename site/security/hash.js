@@ -13,5 +13,5 @@ async function checkHash(enteredData, hashedData) {
 
 module.exports = {
     hashData,
-    checkHash
+    checkHash,
 }

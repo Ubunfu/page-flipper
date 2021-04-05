@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const hash = require('../security/hash')
+const session = require('../security/session')
 AWS.config.update({
     region: process.env.TABLE_USERS_REGION
 })
@@ -23,6 +24,11 @@ async function getUserByEmail(email) {
     return user.Item
 }
 
+async function getUserByToken(token) {
+    const decodedToken = await session.decodeToken(token)
+    return await getUserByEmail(decodedToken.subject)
+}
+
 /**
  * Saves a single user to the DB
  * @param {object} userRegDetails An object containing the registration
@@ -44,5 +50,6 @@ async function saveUser(userRegDetails) {
 
 module.exports = {
     getUserByEmail,
-    saveUser
+    getUserByToken,
+    saveUser,
 }

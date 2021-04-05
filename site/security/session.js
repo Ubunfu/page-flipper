@@ -20,11 +20,16 @@ async function validateSession(req) {
 
 async function createToken(tokenPayload) {
     return jwt.sign(tokenPayload, process.env.SESSION_SECRET, {
-            expiresIn: process.env.SESSION_EXP_MS
-        })
+        expiresIn: process.env.SESSION_EXP_MS
+    })
+}
+
+async function decodeToken(token) {
+    return jwt.decode(token)
 }
 
 module.exports = {
     createSession,
-    validateSession
+    validateSession,
+    decodeToken,
 }
