@@ -16,6 +16,7 @@ router.get('/dashboard', async (req, res) => {
     } catch (error) {
         return res.redirect('/login')
     }
+
     const userRecord = await user.getUserByToken(req.session.token)
 
     let clubs = []
@@ -26,6 +27,20 @@ router.get('/dashboard', async (req, res) => {
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
         clubs: clubs
+    })
+})
+
+router.get('/profile', async (req, res) => {
+    try {
+        await session.validateSession(req)
+    } catch (error) {
+        return res.redirect('/login')
+    }
+
+    const userRecord = await user.getUserByToken(req.session.token)
+
+    return res.render('profile', {
+        user: userRecord
     })
 })
 

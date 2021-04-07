@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Profile</title>
+</head>
+<body>
+    {{>header}}
+    {{>navBar}}
+    <div class="main-content">
+        <div class="profile-content">
+            <div class="profile-img">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yNCAyMmgtMjR2LTIwaDI0djIwem0tMS0xOWgtMjJ2MThoMjJ2LTE4em0tNCAxM3YxaC00di0xaDR6bS02LjAwMiAxaC0xMC45OTdsLS4wMDEtLjkxNGMtLjAwNC0xLjA1LS4wMDctMi4xMzYgMS43MTEtMi41MzMuNzg5LS4xODIgMS43NTMtLjQwNCAxLjg5Mi0uNzA5LjA0OC0uMTA4LS4wNC0uMzAxLS4wOTgtLjQwNy0xLjEwMy0yLjAzNi0xLjMwNS0zLjgzOC0uNTY3LTUuMDc4LjUxNC0uODYzIDEuNDQ4LTEuMzU5IDIuNTYyLTEuMzU5IDEuMTA1IDAgMi4wMzMuNDg4IDIuNTQ1IDEuMzM5LjczNyAxLjIyNC41NDIgMy4wMzMtLjU0OCA1LjA5NS0uMDU3LjEwNi0uMTQ0LjMwMS0uMDk1LjQxLjE0LjMwNSAxLjExOC41MzEgMS44My42OTYgMS43NzkuNDEgMS43NzMgMS41MDMgMS43NjcgMi41NmwtLjAwMS45em0tOS45OTgtMWg4Ljk5OWMuMDAzLTEuMDE0LS4wNTUtMS4yNy0uOTM2LTEuNDczLTEuMTcxLS4yNy0yLjIyNi0uNTE0LTIuNTctMS4yNjctLjE3NC0uMzgxLS4xMzQtLjgxNi4xMTktMS4yOTQuOTIxLTEuNzM5IDEuMTI1LTMuMTk5LjU3Ni00LjExMS0uMzMyLS41NTEtLjkzMS0uODU1LTEuNjg4LS44NTUtLjc2NCAwLTEuMzY5LjMxLTEuNzAzLjg3MS0uNTQyLjkxLS4zMjggMi40MDEuNTg3IDQuMDkuMjU5LjQ3Ni4zMDMuOTEyLjEzIDEuMjk1LS4zNDIuNzU3LTEuMzg3Ljk5Ny0yLjQ5MyAxLjI1Mi0uOTY2LjIyMi0xLjAyMi40NzgtMS4wMjEgMS40OTJ6bTE4LTN2MWgtNnYtMWg2em0wLTN2MWgtNnYtMWg2em0wLTN2MWgtNnYtMWg2eiIvPjwvc3ZnPg==">
+            </div>
+            <div class="profile-data">
+                <span>First Name:</span><span>{{user.firstName}}</span>
+                <span>Last Name:</span><span>{{user.lastName}}</span>
+                <span>Email Address:</span><span>{{user.email}}</span>
+                <span>Club Memberships:</span><span>{{user.clubs.length}}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

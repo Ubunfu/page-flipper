@@ -110,7 +110,7 @@ header .title {
 
 .nav-main {
     font-size: 20px;
-    padding: 32px 0;
+    padding: 16px 0;
     display: flex;
     text-align: center;
     max-width: 60%;
@@ -119,6 +119,15 @@ header .title {
 
 .nav-main a {
     flex: auto;
+    padding: 16px 0;
+}
+
+.nav-main a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-main a:active {
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 .main-content {
@@ -163,6 +172,37 @@ header .title {
     padding: 0 16px;
 }
 
+.club-metadata .club-name,
+.club-metadata .club-description {
+    max-width: 500px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .club .club-name {
     font-size: 24px;
+}
+
+.profile-content {
+    display: flex;
+    font-size: 18px;
+}
+
+.profile-img {
+    margin-right: 32px;
+}
+
+.profile-img img {
+    width: 100px;
+}
+
+.profile-data {
+    flex: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.profile-data span {
+    padding: 10px 0;
 }
