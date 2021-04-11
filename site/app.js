@@ -32,6 +32,7 @@ app.use(session({
 }))
 app.use(routers.main)
 app.use(routers.auth)
+app.use(routers.club)
 
 if (process.env.LISTEN == 'true') {
   app.listen(process.env.LISTEN_PORT, () => {

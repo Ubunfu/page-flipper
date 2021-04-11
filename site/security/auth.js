@@ -15,7 +15,7 @@ async function authenticateUser(req) {
 }
 
 async function registerUser(req) {
-    await user.saveUser(req.body)
+    await user.saveNewUser(req.body)
     await session.createSession(req)
 }
 

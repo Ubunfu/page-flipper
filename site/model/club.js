@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const nanoid = require('nanoid')
 AWS.config.update({
     region: process.env.TABLE_USERS_REGION
 })
@@ -47,7 +48,29 @@ async function getClubsByIds(ids){
     return dbResponse.Responses[process.env.TABLE_CLUBS]
 }
 
+/**
+ * Saves a club to the database
+ * @param {object} clubDetails 
+ * @returns {string} ID of the created club
+ */
+async function saveClub(clubDetails) {
+    const clubId = nanoid.nanoid()
+    const config = {
+        TableName: process.env.TABLE_CLUBS,
+        Item: {
+            id: clubId,
+            name: clubDetails.name,
+            description: clubDetails.description,
+            admins: clubDetails.admins,
+            iconUrl: clubDetails.iconUrl
+        }
+    }
+    await docClient.put(config).promise()
+    return clubId
+}
+
 module.exports = {
     getClubById,
     getClubsByIds,
+    saveClub,
 }

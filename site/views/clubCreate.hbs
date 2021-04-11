@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Page Flipper - Create a Club</title>
+</head>
+<body>
+    {{>header}}
+    {{>navBar}}
+    <div class="main-content">
+        <div class="club-create-content">
+            <div class="club-create-title">Create a Book Club</div>
+            <form action="/club/create" method="post" class="club-create-form">
+                <label for="name">Club Name</label>
+                <input type="text" name="name" placeholder="My Book Club">
+                <label for="description">Description</label>
+                <textarea name="description" cols="30" rows="10" placeholder="The best book club around ..."></textarea>
+                <label for="iconUrl">Icon Url</label>
+                <input type="text" name="iconUrl" placeholder="https://website.com/book.png">
+                <div class="club-create-form-buttons">
+                    <button type="submit">Create Club</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

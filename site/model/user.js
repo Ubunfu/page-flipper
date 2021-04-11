@@ -30,26 +30,59 @@ async function getUserByToken(token) {
 }
 
 /**
- * Saves a single user to the DB
- * @param {object} userRegDetails An object containing the registration
- *  form details of a new user
+ * Saves a single new user to the DB
+ * @param {object} userDetails A user object
  */
-async function saveUser(userRegDetails) {
-    const hashedPassword = await hash.hashData(userRegDetails.password)
+async function saveNewUser(userDetails) {
+    const hashedPassword = await hash.hashData(userDetails.password)
     const config = {
         TableName: process.env.TABLE_USERS,
         Item: {
-            email: userRegDetails.email,
+            email: userDetails.email,
             passHash: hashedPassword,
-            firstName: userRegDetails.firstName,
-            lastName: userRegDetails.lastName
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
+            clubs: []
         }
     }
     await docClient.put(config).promise()
 }
 
+/**
+ * Updates a user in the database
+ * @param {object} userDetails 
+ */
+async function updateUser(userDetails) {
+    const config = {
+        TableName: process.env.TABLE_USERS,
+        Item: {
+            email: userDetails.email,
+            passHash: userDetails.hashedPassword,
+            firstName: userDetails.firstName,
+            lastName: userDetails.lastName,
+            clubs: userDetails.clubs
+        }
+    }
+    await docClient.put(config).promise()
+}
+
+/**
+ * Associates a club ID to a user's list of active clubs
+ * @param {string} userId 
+ * @param {string} clubId 
+ */
+async function addClubToUser(userId, clubId) {
+    const foundUser = await getUserByEmail(userId)
+    console.log(foundUser);
+    foundUser.clubs.push(clubId)
+    console.log(foundUser);
+    await updateUser(foundUser)
+}
+
 module.exports = {
     getUserByEmail,
     getUserByToken,
-    saveUser,
+    saveNewUser,
+    addClubToUser,
+    updateUser,
 }

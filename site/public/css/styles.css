@@ -146,7 +146,8 @@ header .title {
     grid-auto-columns: auto;
 }
 
-.club-list-title {
+.club-list-title,
+.club-create-title {
     font-size: 24px;
     padding-bottom: 36px;
     text-align: center;
@@ -205,4 +206,36 @@ header .title {
 
 .profile-data span {
     padding: 10px 0;
+}
+
+.club-create-content form {
+    display: grid;
+    gap: 16px;
+}
+
+.club-create-content form input,
+.club-create-content form textarea {
+    resize: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    color: #444;
+    padding: 5px;
+}
+
+.club-create-content button {
+    width: 90%;
+    max-width: 200px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.club-create-form-buttons {
+    display: flex;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.club-create-form-buttons button {
+    flex: auto;
 }
