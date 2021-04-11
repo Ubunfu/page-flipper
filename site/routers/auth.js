@@ -25,11 +25,20 @@ router.post('/signup', async (req, res) => {
     if (invalidFields.length != 0) {
         return res.redirect(`/signup?errors=${invalidFields}`)
     }
-    if (await user.getUserByEmail(req.body.email)) {
+    try {
+        // user already registered
+        await user.getUserByEmail(req.body.email)
+        console.log(`user ${req.body.email} is already registered`);
         return res.redirect(`/signup?errors=id_registered`)
+    } catch (error) {
+        if (error.message === 'user_not_found') {
+            // user not registered
+            await auth.registerUser(req)
+            return res.redirect('/')
+        }
+        console.log(`Error: ${error.message}`);
+        return res.status(500).send('error registering user')
     }
-    await auth.registerUser(req)
-    return res.redirect('/')
 })
 
 router.get('/login', async (req, res) => {

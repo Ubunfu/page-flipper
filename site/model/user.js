@@ -57,7 +57,7 @@ async function updateUser(userDetails) {
         TableName: process.env.TABLE_USERS,
         Item: {
             email: userDetails.email,
-            passHash: userDetails.hashedPassword,
+            passHash: userDetails.passHash,
             firstName: userDetails.firstName,
             lastName: userDetails.lastName,
             clubs: userDetails.clubs
