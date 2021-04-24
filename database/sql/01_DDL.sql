@@ -1,9 +1,9 @@
-CREATE SCHEMA "page-flipper"
+CREATE SCHEMA pf
     AUTHORIZATION postgres;
 
 -- USER TABLE
 
-CREATE TABLE "page-flipper"."user"
+CREATE TABLE pf."user"
 (
     user_id uuid NOT NULL,
     email character varying(128) NOT NULL,
@@ -15,12 +15,12 @@ CREATE TABLE "page-flipper"."user"
 
 TABLESPACE pg_default;
 
-ALTER TABLE "page-flipper"."user"
+ALTER TABLE pf."user"
     OWNER to postgres;
 
 -- CLUB TABLE
 
-CREATE TABLE "page-flipper".club
+CREATE TABLE pf.club
 (
     club_id uuid NOT NULL,
     club_name character varying(128) NOT NULL,
@@ -29,12 +29,12 @@ CREATE TABLE "page-flipper".club
     PRIMARY KEY (club_id)
 );
 
-ALTER TABLE "page-flipper".club
+ALTER TABLE pf.club
     OWNER to postgres;
 
 -- CLUB_MEMBER TABLE
 
-CREATE TABLE "page-flipper".club_member
+CREATE TABLE pf.club_member
 (
     club_id uuid NOT NULL,
     user_id uuid NOT NULL,
@@ -42,22 +42,22 @@ CREATE TABLE "page-flipper".club_member
     CONSTRAINT "CLUB_MEMBER_PK_1" PRIMARY KEY (club_id, user_id)
         INCLUDE(club_id, user_id),
     CONSTRAINT "CLUB_MEMBER_FK_1" FOREIGN KEY (club_id)
-        REFERENCES "page-flipper".club (club_id) MATCH SIMPLE
+        REFERENCES pf.club (club_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID,
     CONSTRAINT "FK_2" FOREIGN KEY (user_id)
-        REFERENCES "page-flipper"."user" (user_id) MATCH SIMPLE
+        REFERENCES pf."user" (user_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
 );
 
-ALTER TABLE "page-flipper".club_member
+ALTER TABLE pf.club_member
     OWNER to postgres;
 
 -- CLUB_MEETING TABLE
-CREATE TABLE "page-flipper".club_meeting
+CREATE TABLE pf.club_meeting
 (
     club_id uuid NOT NULL,
     meeting_timestamp timestamp with time zone NOT NULL,
@@ -65,17 +65,17 @@ CREATE TABLE "page-flipper".club_meeting
     CONSTRAINT "CLUB_MEETING_PK_1" PRIMARY KEY (club_id, meeting_timestamp)
         INCLUDE(club_id, meeting_timestamp),
     CONSTRAINT "CLUB_MEETING_FK_1" FOREIGN KEY (club_id)
-        REFERENCES "page-flipper".club (club_id) MATCH SIMPLE
+        REFERENCES pf.club (club_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
 );
 
-ALTER TABLE "page-flipper".club_meeting
+ALTER TABLE pf.club_meeting
     OWNER to postgres;
 
 -- BOOK_REVIEW TABLE
-CREATE TABLE "page-flipper".book_review
+CREATE TABLE pf.book_review
 (
     user_id uuid NOT NULL,
     book_isbn character varying(16) NOT NULL,
@@ -85,13 +85,13 @@ CREATE TABLE "page-flipper".book_review
     CONSTRAINT "BOOK_REVIEW_PK_1" PRIMARY KEY (user_id, book_isbn)
         INCLUDE(user_id, book_isbn),
     CONSTRAINT "BOOK_REVIEW_FK_1" FOREIGN KEY (user_id)
-        REFERENCES "page-flipper"."user" (user_id) MATCH SIMPLE
+        REFERENCES pf."user" (user_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
 );
 
-ALTER TABLE "page-flipper".book_review
+ALTER TABLE pf.book_review
     OWNER to postgres;
 
 COMMIT;
