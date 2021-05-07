@@ -5,7 +5,7 @@ CREATE SCHEMA pf
 
 CREATE TABLE pf."user"
 (
-    user_id uuid NOT NULL,
+    user_id character varying(21) NOT NULL,
     email character varying(128) NOT NULL,
     first_name character varying(64),
     last_name character varying(64),
@@ -22,7 +22,7 @@ ALTER TABLE pf."user"
 
 CREATE TABLE pf.club
 (
-    club_id uuid NOT NULL,
+    club_id character varying(21) NOT NULL,
     club_name character varying(128) NOT NULL,
     club_desc character varying(4096),
     club_icon_url character varying,
@@ -36,8 +36,8 @@ ALTER TABLE pf.club
 
 CREATE TABLE pf.club_member
 (
-    club_id uuid NOT NULL,
-    user_id uuid NOT NULL,
+    club_id character varying(21) NOT NULL,
+    user_id character varying(21) NOT NULL,
     club_role character varying(32) NOT NULL,
     CONSTRAINT "CLUB_MEMBER_PK_1" PRIMARY KEY (club_id, user_id)
         INCLUDE(club_id, user_id),
@@ -59,7 +59,7 @@ ALTER TABLE pf.club_member
 -- CLUB_MEETING TABLE
 CREATE TABLE pf.club_meeting
 (
-    club_id uuid NOT NULL,
+    club_id character varying(21) NOT NULL,
     meeting_timestamp timestamp with time zone NOT NULL,
     book_isbn character varying(16),
     CONSTRAINT "CLUB_MEETING_PK_1" PRIMARY KEY (club_id, meeting_timestamp)
@@ -77,7 +77,7 @@ ALTER TABLE pf.club_meeting
 -- BOOK_REVIEW TABLE
 CREATE TABLE pf.book_review
 (
-    user_id uuid NOT NULL,
+    user_id character varying(21) NOT NULL,
     book_isbn character varying(16) NOT NULL,
     review_rating int NOT NULL,
     review_detail character varying(16384),
