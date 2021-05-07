@@ -1,5 +1,5 @@
 const express = require('express')
-const { user, club } = require('../model')
+const { dbService } = require('../db')
 const router = express.Router()
 const { session } = require('../security')
 
@@ -19,10 +19,9 @@ router.get('/club/create', (req, res) => {
 router.post('/club/create', async (req, res) => {
     let clubDetails = req.body
     const decodedToken = await session.decodeToken(req.session.token)
-    const userId = decodedToken.subject
-    clubDetails.admins = new Array(userId)
-    const clubId = await club.saveClub(clubDetails)
-    await user.addClubToUser(userId, clubId)
+    const user_id = decodedToken.subject
+    const club_id = await dbService.saveClub(clubDetails)
+    await dbService.saveClubMember(club_id, user_id, 'ADMIN')
     return res.redirect('/dashboard')
 })
 

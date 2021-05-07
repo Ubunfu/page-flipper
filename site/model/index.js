@@ -1,7 +1,7 @@
-const user = require('./user')
-const club = require('./club')
+const userModel = require('./userModel')
+const clubModel = require('./clubModel')
 
 module.exports = {
-    user,
-    club,
+    userModel,
+    clubModel,
 }

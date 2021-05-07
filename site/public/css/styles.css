@@ -185,6 +185,10 @@ header .title {
     font-size: 24px;
 }
 
+.club-role {
+    margin-top:25px;
+}
+
 .profile-content {
     display: flex;
     font-size: 18px;
