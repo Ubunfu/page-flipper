@@ -46,8 +46,8 @@ CREATE TABLE pf.club_member
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID,
-    CONSTRAINT "FK_2" FOREIGN KEY (user_id)
-        REFERENCES pf."user" (user_id) MATCH SIMPLE
+    CONSTRAINT "CLUB_MEMBER_FK_2" FOREIGN KEY (user_id)
+        REFERENCES pf.user (user_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
