@@ -1,5 +1,5 @@
 const express = require('express')
-const { user, club } = require('../model')
+const { dbService } = require('../db')
 const router = express.Router()
 const { session } = require('../security')
 
@@ -17,16 +17,14 @@ router.get('/dashboard', async (req, res) => {
         return res.redirect('/login')
     }
 
-    const userRecord = await user.getUserByToken(req.session.token)
+    const decodedToken = await session.decodeToken(req.session.token)
+    const userRecord = await dbService.getUserById(decodedToken.subject)
 
-    let clubs = []
-    if (userRecord.clubs && userRecord.clubs.length > 0) {
-        clubs = await club.getClubsByIds(userRecord.clubs)
-    }
+    let clubs = await dbService.getClubsByUserId(userRecord.user_id)
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
-        clubs: clubs
+        clubs
     })
 })
 
@@ -37,10 +35,11 @@ router.get('/profile', async (req, res) => {
         return res.redirect('/login')
     }
 
-    const userRecord = await user.getUserByToken(req.session.token)
+    const decodedToken = await session.decodeToken(req.session.token)
+    const user = await dbService.getUserById(decodedToken.subject)
 
     return res.render('profile', {
-        user: userRecord
+        user
     })
 })
 

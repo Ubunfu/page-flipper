@@ -1,5 +1,5 @@
 const express = require('express')
-const { user } = require('../model')
+const { dbService } = require('../db')
 const { validators, auth, session } = require('../security')
 const router = express.Router()
 
@@ -12,7 +12,7 @@ router.get('/signup', async (req, res) => {
             invalidEmail: errors.includes('email'),
             invalidPassword: errors.includes('password'),
             idRegistered: errors.includes('id_registered')
-         })
+        })
     }
     if (req.session.token) {
         return res.redirect('/dashboard')
@@ -27,7 +27,7 @@ router.post('/signup', async (req, res) => {
     }
     try {
         // user already registered
-        await user.getUserByEmail(req.body.email)
+        await dbService.getUserByEmail(req.body.email)
         console.log(`user ${req.body.email} is already registered`);
         return res.redirect(`/signup?errors=id_registered`)
     } catch (error) {
