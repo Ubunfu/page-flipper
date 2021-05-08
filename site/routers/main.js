@@ -21,7 +21,6 @@ router.get('/dashboard', async (req, res) => {
     const userRecord = await dbService.getUserById(decodedToken.subject)
 
     let clubs = await dbService.getClubsByUserId(userRecord.user_id)
-    console.log(clubs);
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
