@@ -25,11 +25,21 @@ app.use(function (req, res, next) {
   res.header('x-powered-by', 'serverless-express')
   next()
 })
-app.use(session({
+let sessionConfig = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
-}))
+}
+if (process.env.SESSION_STORE_PROVIDER == 'REDIS') {
+  const redis = require('redis')
+  let RedisStore = require('connect-redis')(session)
+  const redisClientOptions = {
+    url: process.env.REDIS_CONNECT_STRING
+  }
+  let redisClient = redis.createClient(redisClientOptions)
+  sessionConfig.store = new RedisStore({ client: redisClient })
+}
+app.use(session(sessionConfig))
 app.use(routers.main)
 app.use(routers.auth)
 app.use(routers.club)
