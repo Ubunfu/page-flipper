@@ -16,7 +16,7 @@ async function authenticateUser(req) {
 
 async function registerUser(req) {
     const user = await dbService.saveUser(req.body)
-    await session.createSession(user)
+    await session.createSession(req, user)
 }
 
 module.exports = {

@@ -13,6 +13,13 @@ Session management is powered by the `express-session` Express middleware.  The 
 back-end store to use for session data is configurable via the `SESSION_STORE_PROVIDER` 
 configuration.
 
+Passwords are securely hashed prior to being stored per 
+[OWASP recommendations](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).
+At time of writing, this entails the following Argon2id minimum configuration:
+* 15MB memory
+* Iteration count of 2
+* 1 degree or parallelism
+
 ## Configuration
 * `DB_CONNECT_STRING`: Connection string to the database
   * Type: `string`
