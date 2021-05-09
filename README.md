@@ -1,4 +1,5 @@
-# Page Flipper
+![page-flipper](img/repo-banner.png)
+
 Page Flipper is a place dedicated to enjoying your favorite books together with friends. 
 Plan club meetings, propose book selections, vote on candidates, and leave your thoughts 
 with ratings and reviews.
@@ -19,6 +20,8 @@ At time of writing, this entails the following Argon2id minimum configuration:
 * 15MB memory
 * Iteration count of 2
 * 1 degree or parallelism
+
+Builds run on Circle CI.
 
 ## Configuration
 * `DB_CONNECT_STRING`: Connection string to the database
