@@ -10,9 +10,10 @@ inputs:
   region: us-east-1
   domain: ${env:DOMAIN}
   env:
+    DB_CONNECT_STRING: ${env:DB_CONNECT_STRING}
     LISTEN: ${env:LISTEN}
     LISTEN_PORT: ${env:LISTEN_PORT}
+    REDIS_CONNECT_STRING: ${env:REDIS_CONNECT_STRING}
     SESSION_SECRET: ${env:SESSION_SECRET}
     SESSION_EXP_MS: ${env:SESSION_EXP_MS}
-    TABLE_USERS: ${output:pf-user-database.name}
-    TABLE_USERS_REGION: ${output:pf-user-database.region}
+    SESSION_STORE_PROVIDER: ${env:SESSION_STORE_PROVIDER}
