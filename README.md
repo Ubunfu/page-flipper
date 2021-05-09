@@ -1,5 +1,11 @@
 ![page-flipper](img/repo-banner.png)
 
+[![Latest Release](https://img.shields.io/github/v/release/Ubunfu/page-flipper)](https://github.com/Ubunfu/page-flipper/releases)
+[![codecov](https://codecov.io/gh/Ubunfu/page-flipper/branch/master/graph/badge.svg?token=D2SOLR1VOK)](https://codecov.io/gh/Ubunfu/page-flipper)
+[![CircleCI](https://img.shields.io/circleci/build/github/Ubunfu/page-flipper?logo=circleci)](https://app.circleci.com/pipelines/github/Ubunfu/page-flipper)
+![Contrubutors](https://img.shields.io/github/contributors/Ubunfu/page-flipper?color=blue)
+![Last Commit](https://img.shields.io/github/last-commit/Ubunfu/page-flipper)
+
 Page Flipper is a place dedicated to enjoying your favorite books together with friends. 
 Plan club meetings, propose book selections, vote on candidates, and leave your thoughts 
 with ratings and reviews.
