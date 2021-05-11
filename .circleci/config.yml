@@ -1,7 +1,7 @@
 
 version: 2.1
 orbs:
-  aws-cli: circleci/aws-cli@1.3.2
+  aws-cli: circleci/aws-cli@2.0.0
   serverless: circleci/serverless-framework@1.0.1
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
           app-name: pf-web
           org-name: ryanallen
       - run:
-          command: cd ./site && serverless deploy --stage dev
           name: deploy
+          command: cd ./site && serverless deploy --stage dev
   deploy-prod:
     executor: serverless/default
     steps:
@@ -48,8 +48,8 @@ jobs:
           app-name: pf-web
           org-name: ryanallen
       - run:
-          command: serverless deploy --stage prod
           name: deploy
+          command: cd ./site && serverless deploy --stage prod
 
 workflows:
   version: 2
