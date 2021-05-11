@@ -34,7 +34,7 @@ jobs:
           app-name: pf-web
           org-name: ryanallen
       - run:
-          command: cd ./site && serverless deploy --stage dev
+          command: serverless deploy --stage dev
           name: deploy
   deploy-prod:
     executor: serverless/default
