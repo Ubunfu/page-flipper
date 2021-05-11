@@ -25,10 +25,6 @@ jobs:
   deploy-dev:
     executor: serverless/default
     steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: cd ./site && npm install
       - aws-cli/setup
       - serverless/setup:
           app-name: pf-web
@@ -39,10 +35,6 @@ jobs:
   deploy-prod:
     executor: serverless/default
     steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: cd ./site && npm install
       - aws-cli/setup
       - serverless/setup:
           app-name: pf-web
