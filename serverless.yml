@@ -1,2 +1,9 @@
 app: page-flipper
 org: ryanallen
+
+service: pf-web
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
