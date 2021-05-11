@@ -58,6 +58,7 @@ workflows:
       - build-and-test
       - deploy-dev:
           context: 
+            - pf-web
             - pf-web-dev
           requires:
             - build-and-test
@@ -68,6 +69,7 @@ workflows:
                 - /feature\/.*/
       - deploy-prod:
           context: 
+            - pf-web
             - pf-web-prod
           requires:
             - build-and-test
