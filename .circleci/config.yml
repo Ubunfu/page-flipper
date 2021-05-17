@@ -31,8 +31,9 @@ jobs:
           command: cd ./site && npm install
       - aws-cli/setup
       - serverless/setup:
-          app-name: pf-web
+          app-name: page-flipper
           org-name: ryanallen
+          provider: AWS
       - run:
           name: deploy
           # command: cd ./site && serverless deploy --stage dev
