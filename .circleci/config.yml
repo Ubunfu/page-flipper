@@ -42,12 +42,10 @@ jobs:
           name: Install Dependencies
           command: cd ./site && npm install
       - aws-cli/setup
-      - serverless/setup:
-          app-name: pf-web
-          org-name: ryanallen
+      - serverless/setup
       - run:
           name: deploy
-          command: cd ./site && serverless deploy --stage prod
+          command: serverless deploy --stage prod
 
 workflows:
   version: 2
