@@ -2,10 +2,6 @@ component: aws-dynamodb
 
 name: pf-web-sessionstore
 
-provider:
-  name: aws
-  region: us-east-1
-
 inputs:
   name: ${name}-${stage}
   region: us-east-1
