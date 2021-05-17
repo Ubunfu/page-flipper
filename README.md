@@ -30,6 +30,12 @@ At time of writing, this entails the following Argon2id minimum configuration:
 Builds run on Circle CI.
 
 ## Configuration
+* `AWS_IAM_ROLE_NAME`: If deploying this service to AWS using the Serverless 
+  framework, provide the name of an IAM role defining the service's permissions. If
+  `SESSION_STORE_PROVIDER=DYNAMODB`, this role should provide read/write access to
+  the table.
+  * Type: `string`
+  * Default: n/a
 * `DB_CONNECT_STRING`: Connection string to the database
   * Type: `string`
   * Default: n/a

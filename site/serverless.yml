@@ -9,6 +9,7 @@ inputs:
   description: page-flipper web app
   region: us-east-1
   domain: ${env:DOMAIN}
+  roleName: ${env:AWS_IAM_ROLE_NAME}
   env:
     DB_CONNECT_STRING: ${env:DB_CONNECT_STRING}
     LISTEN: ${env:LISTEN}
