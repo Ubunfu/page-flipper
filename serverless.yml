@@ -3,3 +3,4 @@ org: ryanallen
 
 provider:
   name: aws
+  region: us-east-1
