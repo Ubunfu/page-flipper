@@ -30,10 +30,7 @@ jobs:
           name: Install Dependencies
           command: cd ./site && npm install
       - aws-cli/setup
-      - serverless/setup:
-          app-name: page-flipper
-          org-name: ryanallen
-          provider: AWS
+      - serverless/setup
       - run:
           name: deploy
           # command: cd ./site && serverless deploy --stage dev
