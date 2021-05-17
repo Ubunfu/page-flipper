@@ -67,7 +67,7 @@ workflows:
             branches:
               only:
                 - develop
-                - feature/**
+                - /feature\/.*/
       - deploy-prod:
           context: 
             - pf-web
