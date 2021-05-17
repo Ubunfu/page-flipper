@@ -39,6 +39,19 @@ if (process.env.SESSION_STORE_PROVIDER == 'REDIS') {
   let redisClient = redis.createClient(redisClientOptions)
   sessionConfig.store = new RedisStore({ client: redisClient })
 }
+if (process.env.SESSION_STORE_PROVIDER == 'DYNAMODB') {
+  const DynamoDBStore = require('dynamodb-store')
+  const options = {
+    table: {
+      name: process.env.SESSION_STORE_DYNAMODB_TABLE,
+      hashKey: process.env.SESSION_STORE_DYNAMODB_HASH_KEY
+    },
+    keepExpired: false,
+    touchInterval: 30000,
+    ttl: process.env.SESSION_EXP_MS
+  }
+  sessionConfig.store = new DynamoDBStore(options)
+}
 app.use(session(sessionConfig))
 app.use(routers.main)
 app.use(routers.auth)
