@@ -1,0 +1,12 @@
+component: aws-dynamodb
+name: pf-web-sessionstore
+
+inputs:
+  name: ${name}-${stage}
+  region: us-east-1
+  attributeDefinitions:
+    - AttributeName: sessionKey
+      AttributeType: S
+  keySchema:
+    - AttributeName: sessionKey
+      KeyType: HASH

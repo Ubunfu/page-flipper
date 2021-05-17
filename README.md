@@ -54,7 +54,11 @@ Builds run on Circle CI.
 * `SESSION_SECRET`: The symmetric secret used to sign JWT access tokens
   * Type: `string`
   * Default: n/a
+* `SESSION_STORE_DYNAMODB_TABLE`: If `SESSION_STORE_PROVIDER=DYNAMODB`, then supply the name
+  of the DynamoDB table that will be used to store session data.
+  * Type: `string`
+  * Default: n/a
 * `SESSION_STORE_PROVIDER`: The type of back-end store to be used for session information. 
   * Type: `string`
   * Default: `IN-MEMORY`
-  * Options: [`IN-MEMORY`, `REDIS`]
+  * Options: [`IN-MEMORY`, `REDIS`, `DYNAMODB`]

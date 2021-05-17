@@ -35,7 +35,8 @@ jobs:
           org-name: ryanallen
       - run:
           name: deploy
-          command: cd ./site && serverless deploy --stage dev
+          # command: cd ./site && serverless deploy --stage dev
+          command: serverless deploy --stage dev
   deploy-prod:
     executor: serverless/default
     steps:
@@ -66,6 +67,7 @@ workflows:
             branches:
               only:
                 - develop
+                - feature/**
       - deploy-prod:
           context: 
             - pf-web

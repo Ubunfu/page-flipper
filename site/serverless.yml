@@ -2,6 +2,11 @@ component: express
 
 name: pf-web
 
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+
 useDotenv: true
 
 inputs:
@@ -13,7 +18,7 @@ inputs:
     DB_CONNECT_STRING: ${env:DB_CONNECT_STRING}
     LISTEN: ${env:LISTEN}
     LISTEN_PORT: ${env:LISTEN_PORT}
-    REDIS_CONNECT_STRING: ${env:REDIS_CONNECT_STRING}
     SESSION_SECRET: ${env:SESSION_SECRET}
     SESSION_EXP_MS: ${env:SESSION_EXP_MS}
+    SESSION_STORE_DYNAMODB_TABLE: ${output:pf-web-sessionstore.name}
     SESSION_STORE_PROVIDER: ${env:SESSION_STORE_PROVIDER}
