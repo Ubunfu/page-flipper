@@ -1,2 +1,5 @@
 app: page-flipper
 org: ryanallen
+
+provider:
+  name: aws
