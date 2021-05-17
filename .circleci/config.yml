@@ -33,7 +33,6 @@ jobs:
       - serverless/setup
       - run:
           name: deploy
-          # command: cd ./site && serverless deploy --stage dev
           command: serverless deploy --stage dev
   deploy-prod:
     executor: serverless/default
