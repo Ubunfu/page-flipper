@@ -48,7 +48,7 @@ if (process.env.SESSION_STORE_PROVIDER == 'DYNAMODB') {
     },
     keepExpired: false,
     touchInterval: 30000,
-    ttl: process.env.SESSION_EXP_MS
+    ttl: parseInt(process.env.SESSION_EXP_MS)
   }
   sessionConfig.store = new DynamoDBStore(options)
 }
