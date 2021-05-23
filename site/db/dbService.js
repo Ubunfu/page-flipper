@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { config } = require('dotenv')
 const { Pool } = require('pg')
 const validator = require('validator')
 const { userModel, clubModel } = require('../model')
