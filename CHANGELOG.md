@@ -9,3 +9,4 @@ I like [semantic versioning](https://semver.org/), so this project conforms to i
 * [feature] [Adding DynamoDB as optional supported session storage](https://github.com/Ubunfu/page-flipper/pull/10)
 * [bugfix] [Properly encode sign-up web-form details](https://github.com/Ubunfu/page-flipper/pull/12)
 * [feature] [Configurable database schema](https://github.com/Ubunfu/page-flipper/pull/13)
+* [documentation] [Updating docs for running outside of AWS](https://github.com/Ubunfu/page-flipper/pull/14)

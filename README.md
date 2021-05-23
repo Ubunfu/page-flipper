@@ -41,6 +41,22 @@ Builds run on Circle CI.
   
   * Type: `string`
   * Default: n/a
+* `AWS_REGION`: Only necessary if the site is running outside of AWS, and the site needs
+    access to a resource within AWS, such as a DynamoDB-backed session store. Set this to
+    the region in which those resources are located
+    * Type: `string`
+    * Default: n/a
+    * Example: `us-east-1`
+* `AWS_ACCESS_KEY_ID`: Only necessary if the site is running outside of AWS, and the site needs
+    access to a resource within AWS, such as a DynamoDB-backed session store. Set this to
+    the access key ID of the credentials that should be used to authenticate with AWS.
+    * Type: `string`
+    * Default: n/a
+* `AWS_SECRET_ACCESS_KEY`: Only necessary if the site is running outside of AWS, and the site needs
+    access to a resource within AWS, such as a DynamoDB-backed session store. Set this to
+    the secret access key of the credentials that should be used to authenticate with AWS.
+    * Type: `string`
+    * Default: n/a
 * `DB_CONNECT_STRING`: Connection string to the database, providing the scheme, 
     username, password, hostname, port, and database name. 
   * Type: `string`
@@ -72,11 +88,11 @@ Builds run on Circle CI.
 * `SESSION_STORE_DYNAMODB_HASH_KEY`: If `SESSION_STORE_PROVIDER=DYNAMODB`, then supply the name
   of the hash key for the DynamoDB table that will be used to store session data.
   * Type: `string`
-  * Default: n/a
+  * Default: `sessionId`
 * `SESSION_STORE_DYNAMODB_TABLE`: If `SESSION_STORE_PROVIDER=DYNAMODB`, then supply the name
   of the DynamoDB table that will be used to store session data.
   * Type: `string`
-  * Default: n/a
+  * Default: `sessions`
 * `SESSION_STORE_PROVIDER`: The type of back-end store to be used for session information. 
   * Type: `string`
   * Default: `IN-MEMORY`
