@@ -9,7 +9,7 @@ async function getUserById(pool, user_id) {
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
     }
-    return dbResp.rows[0]
+    return decodeUserObject(dbResp.rows[0])
 }
 
 /**
@@ -25,7 +25,7 @@ async function getUserByEmail(pool, email) {
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
     }
-    return dbResp.rows[0]
+    return decodeUserObject(dbResp.rows[0])
 }
 
 /**
@@ -49,6 +49,14 @@ async function saveUser(pool, userDetails) {
         first_name: userDetails.firstName,
         last_name: userDetails.lastName
     }
+}
+
+function decodeUserObject(user) {
+    const decodedUser = user
+    decodedUser.email = encoders.base64Decode(user.email)
+    decodedUser.first_name = encoders.base64Decode(user.first_name)
+    decodedUser.last_name = encoders.base64Decode(user.last_name)
+    return decodedUser
 }
 
 module.exports = {
