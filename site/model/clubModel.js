@@ -1,4 +1,5 @@
 const nanoid = require('nanoid')
+const { encoders } = require('../util')
 
 /**
  * Returns a club by its ID
@@ -13,9 +14,9 @@ async function getClubById(pool, id) {
     const dbRow = dbResponse.rows[0]
     const decodedResponse = {
         clubId: dbRow.club_id,
-        clubName: base64Decode(dbRow.club_name),
-        clubDesc: base64Decode(dbRow.club_desc),
-        iconUrl: base64Decode(dbRow.club_icon_url)
+        clubName: encoders.base64Decode(dbRow.club_name),
+        clubDesc: encoders.base64Decode(dbRow.club_desc),
+        iconUrl: encoders.base64Decode(dbRow.club_icon_url)
     }
     return decodedResponse
 }
@@ -36,9 +37,9 @@ async function getClubsByUserId(pool, userId) {
 
 function decodeClubsByUserIdResp(clubs) {
     clubs.forEach(club => {
-        club.club_name = base64Decode(club.club_name)
-        club.club_desc = base64Decode(club.club_desc)
-        club.club_icon_url = base64Decode(club.club_icon_url)
+        club.club_name = encoders.base64Decode(club.club_name)
+        club.club_desc = encoders.base64Decode(club.club_desc)
+        club.club_icon_url = encoders.base64Decode(club.club_icon_url)
     });
     return clubs
 }
@@ -51,9 +52,9 @@ function decodeClubsByUserIdResp(clubs) {
  */
 async function saveClub(pool, clubDetails) {
     const club_id = nanoid.nanoid()
-    const encodedClubName = base64Encode(clubDetails.club_name)
-    const encodedClubDesc = base64Encode(clubDetails.club_desc)
-    const encodedClubIconUrl = base64Encode(clubDetails.club_icon_url)
+    const encodedClubName = encoders.base64Encode(clubDetails.club_name)
+    const encodedClubDesc = encoders.base64Encode(clubDetails.club_desc)
+    const encodedClubIconUrl = encoders.base64Encode(clubDetails.club_icon_url)
     const queryString = 
         `insert into pf.club (club_id, club_name, club_desc, club_icon_url) ` + 
         `values ('${club_id}', '${encodedClubName}', '${encodedClubDesc}', '${encodedClubIconUrl}')`
@@ -66,14 +67,6 @@ async function saveClubMember(pool, club_id, user_id, club_role) {
         `insert into pf.club_member (club_id, user_id, club_role) ` + 
         `values ('${club_id}', '${user_id}', '${club_role}')`
     await pool.query(queryString)
-}
-
-function base64Encode(data) {
-    return Buffer.from(data).toString('base64')
-}
-
-function base64Decode(data) {
-    return Buffer.from(data, 'base64').toString('ascii')
 }
 
 module.exports = {
