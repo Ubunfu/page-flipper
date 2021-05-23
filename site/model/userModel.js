@@ -3,8 +3,15 @@ const { Pool } = require('pg')
 const nanoid = require('nanoid')
 const { encoders } = require('../util')
 
-async function getUserById(pool, user_id) {
-    const queryString = `select * from pf.user where user_id = '${user_id}'`
+/**
+ * Gets a single user from the DB by their user ID
+ * @param {Pool} pool database connection pool
+ * @param {string} schemaName name of the database schema
+ * @param {string} email email address of a user
+ * @returns 
+ */
+async function getUserById(pool, schemaName, user_id) {
+    const queryString = `select * from ${schemaName}.user where user_id = '${user_id}'`
     const dbResp = await pool.query(queryString)
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
@@ -13,14 +20,15 @@ async function getUserById(pool, user_id) {
 }
 
 /**
- * Gets a single user document from the DB
+ * Gets a single user from the DB by their email address
  * @param {Pool} pool database connection pool
+ * @param {string} schemaName name of the database schema
  * @param {string} email email address of a user
  * @returns 
  */
-async function getUserByEmail(pool, email) {
+async function getUserByEmail(pool, schemaName, email) {
     const encodedEmail = encoders.base64Encode(email)
-    const queryString = `select * from pf.user where email = '${encodedEmail}'`
+    const queryString = `select * from ${schemaName}.user where email = '${encodedEmail}'`
     const dbResp = await pool.query(queryString)
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
@@ -31,16 +39,17 @@ async function getUserByEmail(pool, email) {
 /**
  * Saves a single new user to the DB
  * @param {Pool} pool database connection pool
+ * @param {string} schemaName name of the database schema
  * @param {object} userDetails A user object
  */
-async function saveUser(pool, userDetails) {
+async function saveUser(pool, schemaName, userDetails) {
     const user_id = nanoid.nanoid()
     const encodedEmail = encoders.base64Encode(userDetails.email)
     const encodedFirstName = encoders.base64Encode(userDetails.firstName)
     const encodedLastName = encoders.base64Encode(userDetails.lastName)
     const passHash = await hash.hashData(userDetails.password)
     const queryString = 
-        `insert into pf.user (user_id, email, first_name, last_name, pass_hash) ` + 
+        `insert into ${schemaName}.user (user_id, email, first_name, last_name, pass_hash) ` + 
         `values ('${user_id}', '${encodedEmail}', '${encodedFirstName}', '${encodedLastName}', '${passHash}')`
     await pool.query(queryString)
     return {
