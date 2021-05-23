@@ -63,6 +63,7 @@ workflows:
               only:
                 - develop
                 - /feature\/.*/
+                - /bugfix\/.*/
       - deploy-prod:
           context: 
             - pf-web
