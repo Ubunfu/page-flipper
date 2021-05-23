@@ -30,7 +30,19 @@ At time of writing, this entails the following Argon2id minimum configuration:
 Builds run on Circle CI.
 
 ## Configuration
-* `DB_CONNECT_STRING`: Connection string to the database
+* `AWS_IAM_ROLE_NAME`: If deploying this service to AWS using the Serverless 
+  framework, provide the name of an IAM role defining the service's permissions. If
+  `SESSION_STORE_PROVIDER=DYNAMODB`, this role should provide the following access to
+  the session table at a minimum: 
+  
+  Read: [DescribeTable, GetItem, Scan]
+  
+  Write: [CreateTable, DeleteItem, PutItem, UpdateItem]
+  
+  * Type: `string`
+  * Default: n/a
+* `DB_CONNECT_STRING`: Connection string to the database, providing the scheme, 
+    username, password, hostname, port, and database name. 
   * Type: `string`
   * Default: n/a
   * Example: `postgresql://postgres:password@localhost:5432/postgres`
@@ -54,7 +66,15 @@ Builds run on Circle CI.
 * `SESSION_SECRET`: The symmetric secret used to sign JWT access tokens
   * Type: `string`
   * Default: n/a
+* `SESSION_STORE_DYNAMODB_HASH_KEY`: If `SESSION_STORE_PROVIDER=DYNAMODB`, then supply the name
+  of the hash key for the DynamoDB table that will be used to store session data.
+  * Type: `string`
+  * Default: n/a
+* `SESSION_STORE_DYNAMODB_TABLE`: If `SESSION_STORE_PROVIDER=DYNAMODB`, then supply the name
+  of the DynamoDB table that will be used to store session data.
+  * Type: `string`
+  * Default: n/a
 * `SESSION_STORE_PROVIDER`: The type of back-end store to be used for session information. 
   * Type: `string`
   * Default: `IN-MEMORY`
-  * Options: [`IN-MEMORY`, `REDIS`]
+  * Options: [`IN-MEMORY`, `REDIS`, `DYNAMODB`]

@@ -9,11 +9,13 @@ inputs:
   description: page-flipper web app
   region: us-east-1
   domain: ${env:DOMAIN}
+  roleName: ${env:AWS_IAM_ROLE_NAME}
   env:
     DB_CONNECT_STRING: ${env:DB_CONNECT_STRING}
     LISTEN: ${env:LISTEN}
     LISTEN_PORT: ${env:LISTEN_PORT}
-    REDIS_CONNECT_STRING: ${env:REDIS_CONNECT_STRING}
-    SESSION_SECRET: ${env:SESSION_SECRET}
     SESSION_EXP_MS: ${env:SESSION_EXP_MS}
+    SESSION_SECRET: ${env:SESSION_SECRET}
+    SESSION_STORE_DYNAMODB_HASH_KEY: ${env:SESSION_STORE_DYNAMODB_HASH_KEY}
+    SESSION_STORE_DYNAMODB_TABLE: ${output:pf-web-sessionstore.name}
     SESSION_STORE_PROVIDER: ${env:SESSION_STORE_PROVIDER}
