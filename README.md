@@ -32,11 +32,17 @@ Builds run on Circle CI.
 ## Configuration
 * `AWS_IAM_ROLE_NAME`: If deploying this service to AWS using the Serverless 
   framework, provide the name of an IAM role defining the service's permissions. If
-  `SESSION_STORE_PROVIDER=DYNAMODB`, this role should provide read/write access to
-  the table.
+  `SESSION_STORE_PROVIDER=DYNAMODB`, this role should provide the following access to
+  the session table at a minimum: 
+  
+  Read: [DescribeTable, GetItem, Scan]
+  
+  Write: [CreateTable, DeleteItem, PutItem, UpdateItem]
+  
   * Type: `string`
   * Default: n/a
-* `DB_CONNECT_STRING`: Connection string to the database
+* `DB_CONNECT_STRING`: Connection string to the database, providing the scheme, 
+    username, password, hostname, port, and database name. 
   * Type: `string`
   * Default: n/a
   * Example: `postgresql://postgres:password@localhost:5432/postgres`
