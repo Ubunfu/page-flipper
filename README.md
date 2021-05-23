@@ -46,6 +46,9 @@ Builds run on Circle CI.
   * Type: `string`
   * Default: n/a
   * Example: `postgresql://postgres:password@localhost:5432/postgres`
+* `DB_SCHEMA`: The name of the database schema
+  * Type: `string`
+  * Default: n/a
 * `DOMAIN`: Domain to register in front of the site
   * Type: `string`
   * Default: n/a
