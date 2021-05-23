@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "dynamodb-store": "^1.2.0"
-  }
-}
