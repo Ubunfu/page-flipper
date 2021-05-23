@@ -1,6 +1,7 @@
 const hash = require('../security/hash')
 const { Pool } = require('pg')
 const nanoid = require('nanoid')
+const { encoders } = require('../util')
 
 async function getUserById(pool, user_id) {
     const queryString = `select * from pf.user where user_id = '${user_id}'`
@@ -18,7 +19,8 @@ async function getUserById(pool, user_id) {
  * @returns 
  */
 async function getUserByEmail(pool, email) {
-    const queryString = `select * from pf.user where email = '${email}'`
+    const encodedEmail = encoders.base64Encode(email)
+    const queryString = `select * from pf.user where email = '${encodedEmail}'`
     const dbResp = await pool.query(queryString)
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
@@ -33,10 +35,13 @@ async function getUserByEmail(pool, email) {
  */
 async function saveUser(pool, userDetails) {
     const user_id = nanoid.nanoid()
+    const encodedEmail = encoders.base64Encode(userDetails.email)
+    const encodedFirstName = encoders.base64Encode(userDetails.firstName)
+    const encodedLastName = encoders.base64Encode(userDetails.lastName)
     const passHash = await hash.hashData(userDetails.password)
     const queryString = 
         `insert into pf.user (user_id, email, first_name, last_name, pass_hash) ` + 
-        `values ('${user_id}', '${userDetails.email}', '${userDetails.firstName}', '${userDetails.lastName}', '${passHash}')`
+        `values ('${user_id}', '${encodedEmail}', '${encodedFirstName}', '${encodedLastName}', '${passHash}')`
     await pool.query(queryString)
     return {
         user_id,
