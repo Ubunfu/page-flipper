@@ -74,11 +74,6 @@ Builds run on Circle CI.
 * `LISTEN_PORT`: Port the server will listen on, if `LISTEN=true`
   * Type: `number`
   * Default: n/a
-* `REDIS_CONNECT_STRING`: If `SESSION_STORE_PROVIDER=REDIS`, then supply a connection 
-  string for Redis.  [More info here](https://www.npmjs.com/package/redis).
-  * Type: `string`
-  * Default: n/a
-  * Example: `rediss://redis:password@redis:6379/0`
 * `SESSION_EXP_MS`: The life-span of a new access token in milliseconds.
   * Type: `number`
   * Default: n/a
@@ -97,3 +92,8 @@ Builds run on Circle CI.
   * Type: `string`
   * Default: `IN-MEMORY`
   * Options: [`IN-MEMORY`, `REDIS`, `DYNAMODB`]
+* `SESSION_STORE_REDIS_CONNECT_STRING`: If `SESSION_STORE_PROVIDER=REDIS`, then supply a connection 
+  string for Redis.  [More info here](https://www.npmjs.com/package/redis).
+  * Type: `string`
+  * Default: n/a
+  * Example: `rediss://redis:password@redis:6379/0`
