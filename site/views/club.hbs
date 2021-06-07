@@ -10,14 +10,64 @@
 <body>
     {{>header}}
     {{>navBar}}
-    <div class="main-content">
-        <div class="club-header">
+    <div class="main-content club-home">
+        <div class="club-meta-col">
             <div class="club-icon">
-                <img src="{{club.icon_url}}" alt="">
+                <img src="{{club.iconUrl}}" alt="">
             </div>
             <div class="club-title">
-                {{club.club_name}}
+                {{club.clubName}}
             </div>
+            <div class="club-meta-sec club-desc">
+                {{club.clubDesc}}
+            </div>
+            <div class="club-meta-sec club-admins">
+                <div class="club-meta-sec-title">Club Admins:</div>
+                <ul>
+                    {{#each clubAdmins}}
+                        <li>{{firstName}} {{lastName}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="club-meta-sec club-size">
+                <div class="club-meta-sec-title">Member Count: {{memberCount}}</div>
+            </div>
+            {{#if isRequesterAdmin}}
+            <div class="club-meta-sec admin-tools">
+                <div class="club-meta-sec-title">Admin Tools:</div>
+                <div class="buttons">
+                    <div class="button-link">
+                        <a href="/club/{{club.clubId}}/edit">
+                            <div class="button">Edit Club</div>
+                        </a>
+                    </div>
+                    <div class="button-link">
+                        <a href="/club/{{club.clubId}}/scheduleMeeting">
+                            <div class="button">Schedule Meeting</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        <div class="club-timeline">
+            <div class="timeline-heading">
+                Club Meetings
+            </div>
+            {{#each meetings }}
+                <a href="/meeting/{{meetingId}}">
+                    <div class="club-meeting">
+                        <div class="book-icon">
+                            <img src="{{bookIconUrl}}" alt="">
+                        </div>
+                        <div class="book-meta">
+                            <div class="book-title">{{bookTitle}}</div>
+                            <div class="book-author">{{bookAuthor}}</div>
+                        </div>
+                        <div class="meeting-date"><span>{{meetingDate}}</span></div>
+                    </div>
+                </a>
+            {{/each}}
         </div>
     </div>
 </body>

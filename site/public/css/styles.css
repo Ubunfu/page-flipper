@@ -243,3 +243,139 @@ header .title {
 .club-create-form-buttons button {
     flex: auto;
 }
+
+/* 
+    Styling for the main club home page
+ */
+.club-home {
+    display: flex;
+    max-width: 1000px;
+}
+
+
+/* 
+    Styles for the club metadata column on the left
+ */
+.club-home .club-meta-col {
+    flex: 1;
+    border-right: 1px solid #444;
+    margin-right: 25px;
+    padding: 5px;
+}
+
+/* 
+    Gives sections a visible divider and some spacing
+ */
+.club-home .club-meta-sec {
+    padding: 15px 5px;
+    border-top: 1px solid #444;
+}
+
+.club-home .club-icon {
+    margin: auto;
+    max-width: 200px;
+}
+
+.club-home .club-icon img {
+    max-width: 200px;
+}
+
+.club-home .club-title {
+    padding: 10px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* 
+    Sub-titles within a club meta-section
+ */
+.club-home .club-meta-sec-title {
+    font-size: 18px;
+}
+
+.club-home .club-desc {
+    text-align: center;
+}
+
+.club-home .club-meta-col .club-admins ul {
+    list-style: none;
+}
+
+.club-home .club-meta-col .club-admins ul li {
+    margin: 5px 0;
+}
+
+/* 
+    Container around the button links, allowing them to flex vertically
+*/
+.club-home .club-meta-col .admin-tools .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+/* 
+    Container around the buttons within the links, allowing the divs
+    to stretch horizontally 
+*/
+.club-home .club-meta-col .admin-tools .buttons .button-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.club-home .club-meta-col .admin-tools .button {
+    background-color: #060;
+    padding: 10px;
+    margin: 2px 0;
+    border-radius: 10px;
+    color: white;
+}
+
+/* 
+    Styling for the main club timeline
+ */
+.club-home .club-timeline {
+    flex: 3;
+}
+
+.club-home .club-timeline .timeline-heading {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 
+    Styling for a club meeting tile in the timeline 
+*/
+.club-home .club-meeting {
+    display: flex;
+    border: 1px solid #444;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.club-home .book-icon {
+    flex: 1;
+}
+
+.club-home .book-icon img {
+    max-width: 100px;
+}
+
+.club-home .book-meta {
+    flex: 3;
+}
+
+.club-home .meeting-date {
+    flex: 1;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.club-home .book-meta .book-title {
+    font-size: 18px;
+}
