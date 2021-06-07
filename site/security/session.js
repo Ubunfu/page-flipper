@@ -13,7 +13,7 @@ async function validateSession(req) {
     try {
         jwt.verify(req.session.token, process.env.SESSION_SECRET)
     } catch (error) {
-        console.log(error);
+        console.log(`[SEC SESSION] Error validating token: ${error.message}`);
         throw new Error('invalid_session')
     }
 }
