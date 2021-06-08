@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Pool } = require('pg')
 const validator = require('validator')
-const { userModel, clubModel } = require('../model')
+const { userModel, clubModel, clubMemberModel, clubMeetingModel } = require('../model')
 
 const pool = new Pool({
     connectionString: process.env.DB_CONNECT_STRING
@@ -55,6 +55,28 @@ async function saveClubMember(clubId, userId, clubRole) {
     return await clubModel.saveClubMember(pool, schemaName, clubId, userId, clubRole)
 }
 
+/*
+    Club Member Stuff
+*/
+async function getClubMember(clubId, userId) {
+    return await clubMemberModel.getClubMember(pool, schemaName, clubId, userId)
+}
+
+async function getClubMembersWithRole(clubId, clubRole) {
+    return await clubMemberModel.getClubMembersWithRole(pool, schemaName, clubId, clubRole)
+}
+
+async function getClubMemberCount(clubId) {
+    return await clubMemberModel.getClubMemberCount(pool, schemaName, clubId)
+}
+
+/*
+    Club Meeting Stuff
+*/
+async function getClubMeetings(clubId) {
+    return await clubMeetingModel.getClubMeetings(pool, schemaName, clubId)
+}
+
 module.exports = {
     getUserById,
     getUserByEmail,
@@ -63,4 +85,8 @@ module.exports = {
     getClubsByUserId,
     saveClub,
     saveClubMember,
+    getClubMember,
+    getClubMembersWithRole,
+    getClubMemberCount,
+    getClubMeetings,
 }

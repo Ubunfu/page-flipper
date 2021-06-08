@@ -59,11 +59,14 @@ ALTER TABLE pf.club_member
 -- CLUB_MEETING TABLE
 CREATE TABLE pf.club_meeting
 (
+    "meetingId" character varying(21) NOT NULL,
     "clubId" character varying(21) NOT NULL,
-    "meetingTimestamp" timestamp with time zone NOT NULL,
+    "meetingDate" date NOT NULL,
+    "bookIconUrl" character varying,
+    "bookTitle" character varying(128) NOT NULL,
+    "bookAuthor" character varying(128) NOT NULL,
     "bookIsbn" character varying(16),
-    CONSTRAINT "CLUB_MEETING_PK_1" PRIMARY KEY ("clubId", "meetingTimestamp")
-        INCLUDE("clubId", "meetingTimestamp"),
+    PRIMARY KEY ("meetingId"),
     CONSTRAINT "CLUB_MEETING_FK_1" FOREIGN KEY ("clubId")
         REFERENCES pf.club ("clubId") MATCH SIMPLE
         ON UPDATE CASCADE
