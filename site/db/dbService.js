@@ -23,8 +23,8 @@ function getValidatedSchemaName(configSchemaName) {
     User Stuff
 */
 
-async function getUserById(user_id) {
-    return await userModel.getUserById(pool, schemaName, user_id)
+async function getUserById(userId) {
+    return await userModel.getUserById(pool, schemaName, userId)
 }
 
 async function getUserByEmail(email) {
@@ -51,8 +51,8 @@ async function saveClub(clubDetails) {
     return await clubModel.saveClub(pool, schemaName, clubDetails)
 }
 
-async function saveClubMember(club_id, user_id, club_role) {
-    return await clubModel.saveClubMember(pool, schemaName, club_id, user_id, club_role)
+async function saveClubMember(clubId, userId, clubRole) {
+    return await clubModel.saveClubMember(pool, schemaName, clubId, userId, clubRole)
 }
 
 module.exports = {

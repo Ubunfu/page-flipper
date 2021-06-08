@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 async function createSession(req, user) {
-    const tokenPayload = { subject: user.user_id }
+    const tokenPayload = { subject: user.userId }
     const token = await createToken(tokenPayload)
     req.session.token = token
 }

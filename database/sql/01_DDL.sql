@@ -5,12 +5,12 @@ CREATE SCHEMA pf
 
 CREATE TABLE pf."user"
 (
-    user_id character varying(21) NOT NULL,
-    email character varying(128) NOT NULL,
-    first_name character varying(64),
-    last_name character varying(64),
-    pass_hash character varying(256) NOT NULL,
-    PRIMARY KEY (user_id)
+    "userId" character varying(21) NOT NULL,
+    "email" character varying(128) NOT NULL,
+    "firstName" character varying(64),
+    "lastName" character varying(64),
+    "passHash" character varying(256) NOT NULL,
+    PRIMARY KEY ("userId")
 )
 
 TABLESPACE pg_default;
@@ -22,11 +22,11 @@ ALTER TABLE pf."user"
 
 CREATE TABLE pf.club
 (
-    club_id character varying(21) NOT NULL,
-    club_name character varying(128) NOT NULL,
-    club_desc character varying(4096),
-    club_icon_url character varying,
-    PRIMARY KEY (club_id)
+    "clubId" character varying(21) NOT NULL,
+    "clubName" character varying(128) NOT NULL,
+    "clubDesc" character varying(4096),
+    "clubIconUrl" character varying,
+    PRIMARY KEY ("clubId")
 );
 
 ALTER TABLE pf.club
@@ -36,18 +36,18 @@ ALTER TABLE pf.club
 
 CREATE TABLE pf.club_member
 (
-    club_id character varying(21) NOT NULL,
-    user_id character varying(21) NOT NULL,
-    club_role character varying(32) NOT NULL,
-    CONSTRAINT "CLUB_MEMBER_PK_1" PRIMARY KEY (club_id, user_id)
-        INCLUDE(club_id, user_id),
-    CONSTRAINT "CLUB_MEMBER_FK_1" FOREIGN KEY (club_id)
-        REFERENCES pf.club (club_id) MATCH SIMPLE
+    "clubId" character varying(21) NOT NULL,
+    "userId" character varying(21) NOT NULL,
+    "clubRole" character varying(32) NOT NULL,
+    CONSTRAINT "CLUB_MEMBER_PK_1" PRIMARY KEY ("clubId", "userId")
+        INCLUDE("clubId", "userId"),
+    CONSTRAINT "CLUB_MEMBER_FK_1" FOREIGN KEY ("clubId")
+        REFERENCES pf.club ("clubId") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID,
-    CONSTRAINT "CLUB_MEMBER_FK_2" FOREIGN KEY (user_id)
-        REFERENCES pf.user (user_id) MATCH SIMPLE
+    CONSTRAINT "CLUB_MEMBER_FK_2" FOREIGN KEY ("userId")
+        REFERENCES pf.user ("userId") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
@@ -59,13 +59,13 @@ ALTER TABLE pf.club_member
 -- CLUB_MEETING TABLE
 CREATE TABLE pf.club_meeting
 (
-    club_id character varying(21) NOT NULL,
-    meeting_timestamp timestamp with time zone NOT NULL,
-    book_isbn character varying(16),
-    CONSTRAINT "CLUB_MEETING_PK_1" PRIMARY KEY (club_id, meeting_timestamp)
-        INCLUDE(club_id, meeting_timestamp),
-    CONSTRAINT "CLUB_MEETING_FK_1" FOREIGN KEY (club_id)
-        REFERENCES pf.club (club_id) MATCH SIMPLE
+    "clubId" character varying(21) NOT NULL,
+    "meetingTimestamp" timestamp with time zone NOT NULL,
+    "bookIsbn" character varying(16),
+    CONSTRAINT "CLUB_MEETING_PK_1" PRIMARY KEY ("clubId", "meetingTimestamp")
+        INCLUDE("clubId", "meetingTimestamp"),
+    CONSTRAINT "CLUB_MEETING_FK_1" FOREIGN KEY ("clubId")
+        REFERENCES pf.club ("clubId") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
@@ -77,15 +77,15 @@ ALTER TABLE pf.club_meeting
 -- BOOK_REVIEW TABLE
 CREATE TABLE pf.book_review
 (
-    user_id character varying(21) NOT NULL,
-    book_isbn character varying(16) NOT NULL,
-    review_rating int NOT NULL,
-    review_detail character varying(16384),
-    review_timestamp timestamp with time zone NOT NULL,
-    CONSTRAINT "BOOK_REVIEW_PK_1" PRIMARY KEY (user_id, book_isbn)
-        INCLUDE(user_id, book_isbn),
-    CONSTRAINT "BOOK_REVIEW_FK_1" FOREIGN KEY (user_id)
-        REFERENCES pf."user" (user_id) MATCH SIMPLE
+    "userId" character varying(21) NOT NULL,
+    "bookIsbn" character varying(16) NOT NULL,
+    "reviewRating" int NOT NULL,
+    "reviewDetail" character varying(16384),
+    "reviewTimestamp" timestamp with time zone NOT NULL,
+    CONSTRAINT "BOOK_REVIEW_PK_1" PRIMARY KEY ("userId", "bookIsbn")
+        INCLUDE("userId", "bookIsbn"),
+    CONSTRAINT "BOOK_REVIEW_FK_1" FOREIGN KEY ("userId")
+        REFERENCES pf."user" ("userId") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID

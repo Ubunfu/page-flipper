@@ -8,7 +8,7 @@ async function authenticateUser(req) {
     console.log(`[SEC AUTH] attempting to authenticate user...`);
     const user = await dbService.getUserByEmail(email) // throws 'user_not_found'
     console.log('[SEC AUTH] checking hash...');
-    await hash.checkHash(enteredPassword, user.pass_hash)
+    await hash.checkHash(enteredPassword, user.passHash)
     console.log('[SEC AUTH] creating session...');
     await session.createSession(req, user)
     console.log('[SEC AUTH] created session!');

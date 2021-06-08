@@ -18,9 +18,16 @@ router.get('/dashboard', async (req, res) => {
     }
 
     const decodedToken = await session.decodeToken(req.session.token)
-    const userRecord = await dbService.getUserById(decodedToken.subject)
+    let userRecord
+    try {
+        userRecord = await dbService.getUserById(decodedToken.subject)
+    } catch (error) {
+        console.log(`[RTR] [GET /dashboard] Error: ${error.message}`);
+        console.log(`[RTR] [GET /dashboard] Clearing session cookie and redirecting to /login...`);
+        return res.clearCookie('connect.sid').redirect('/login')
+    }
 
-    let clubs = await dbService.getClubsByUserId(userRecord.user_id)
+    let clubs = await dbService.getClubsByUserId(userRecord.userId)
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),

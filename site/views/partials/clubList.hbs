@@ -2,15 +2,15 @@
     <div class="club-list-title">Your Book Clubs</div>
     <div class="club-grid">
         {{#each clubs}}
-            <a href="/club/{{club_id}}">
+            <a href="/club/{{clubId}}">
                 <div class="club">
                     <div class="club-icon">
-                        <img src="{{club_icon_url}}" alt="">
+                        <img src="{{clubIconUrl}}" alt="">
                     </div>
                     <div class="club-metadata">
-                        <div class="club-name">{{club_name}}</div>
-                        <div class="club-description">{{club_desc}}</div>
-                        <div class="club-role">Role: {{club_role}}</div>
+                        <div class="club-name">{{clubName}}</div>
+                        <div class="club-description">{{clubDesc}}</div>
+                        <div class="club-role">Role: {{clubRole}}</div>
                     </div>
                 </div>
             </a>

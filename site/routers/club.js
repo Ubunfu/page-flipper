@@ -19,9 +19,9 @@ router.get('/club/create', (req, res) => {
 router.post('/club/create', async (req, res) => {
     let clubDetails = req.body
     const decodedToken = await session.decodeToken(req.session.token)
-    const user_id = decodedToken.subject
-    const club_id = await dbService.saveClub(clubDetails)
-    await dbService.saveClubMember(club_id, user_id, 'ADMIN')
+    const userId = decodedToken.subject
+    const clubId = await dbService.saveClub(clubDetails)
+    await dbService.saveClubMember(clubId, userId, 'ADMIN')
     return res.redirect('/dashboard')
 })
 
