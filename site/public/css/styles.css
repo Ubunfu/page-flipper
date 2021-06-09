@@ -218,7 +218,9 @@ header .title {
 }
 
 .club-create-content form input,
-.club-create-content form textarea {
+.club-create-content form textarea,
+.club-edit-content .club-edit-form input,
+.club-edit-content .club-edit-form textarea {
     resize: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
@@ -226,14 +228,16 @@ header .title {
     padding: 5px;
 }
 
-.club-create-content button {
+.club-create-content button,
+.club-edit-form-buttons button {
     width: 90%;
     max-width: 200px;
     margin: 0 auto;
     font-size: 16px;
 }
 
-.club-create-form-buttons {
+.club-create-form-buttons,
+.club-edit-form-buttons {
     display: flex;
     width: 90%;
     max-width: 500px;
@@ -274,6 +278,9 @@ header .title {
 .club-home .club-icon {
     margin: auto;
     max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .club-home .club-icon img {
@@ -378,4 +385,37 @@ header .title {
 
 .club-home .book-meta .book-title {
     font-size: 18px;
+}
+
+/*
+    Flex container for the club edit page
+*/
+.club-edit-content {
+    display: flex;
+}
+
+.club-edit-content .club-img {
+    flex: 1;
+}
+
+.club-edit-content .club-data {
+    flex: 3;
+}
+
+.club-edit-content .club-data .club-edit-field {
+    display: flex;
+    margin: 15px 0;
+}
+
+.club-edit-content .club-data .club-edit-field label {
+    flex: 1;
+}
+
+.club-edit-content .club-data .club-edit-field input {
+    flex: 3;
+}
+
+.club-edit-content .club-data .club-edit-field textarea {
+    flex: 3;
+    height: 200px;
 }

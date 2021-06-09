@@ -51,6 +51,10 @@ async function saveClub(clubDetails) {
     return await clubModel.saveClub(pool, schemaName, clubDetails)
 }
 
+async function updateClub(clubDetails) {
+    return await clubModel.updateClub(pool, schemaName, clubDetails)
+}
+
 async function saveClubMember(clubId, userId, clubRole) {
     return await clubModel.saveClubMember(pool, schemaName, clubId, userId, clubRole)
 }
@@ -84,6 +88,7 @@ module.exports = {
     getClubById,
     getClubsByUserId,
     saveClub,
+    updateClub,
     saveClubMember,
     getClubMember,
     getClubMembersWithRole,

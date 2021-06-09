@@ -57,4 +57,19 @@ router.get('/club/:clubId', async (req, res) => {
     })
 })
 
+router.get('/club/:clubId/edit', async (req, res) => {
+    const club = await dbService.getClubById(req.params.clubId)
+    return res.render('clubEdit', { club })
+})
+
+router.post('/club/:clubId/update', async (req, res) => {
+    const clubId = req.params.clubId
+    let clubDetails = req.body
+    clubDetails.clubId = clubId
+
+    await dbService.updateClub(clubDetails)
+
+    return res.redirect(`/club/${clubId}`)
+})
+
 module.exports = router
