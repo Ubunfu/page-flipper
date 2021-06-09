@@ -1,4 +1,5 @@
 const { encoders } = require('../util')
+const { format } = require('date-fns')
 
 /**
  * Returns the set of all meetings scheduled for a given club
@@ -26,6 +27,7 @@ function decodeMeetingObject(meeting) {
     decodedMeeting.bookIconUrl = encoders.base64Decode(meeting.bookIconUrl)
     decodedMeeting.bookTitle = encoders.base64Decode(meeting.bookTitle)
     decodedMeeting.bookAuthor = encoders.base64Decode(meeting.bookAuthor)
+    decodedMeeting.meetingDate = format(meeting.meetingDate, 'PPP')
     return decodedMeeting
 }
 
