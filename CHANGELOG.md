@@ -11,3 +11,4 @@ I like [semantic versioning](https://semver.org/), so this project conforms to i
 * [feature] [Configurable database schema](https://github.com/Ubunfu/page-flipper/pull/13)
 * [documentation] [Updating docs for running outside of AWS](https://github.com/Ubunfu/page-flipper/pull/14)
 * [feature] [Adding club detail page](https://github.com/Ubunfu/page-flipper/pull/15)
+* [feature] [Adding Logout button](https://github.com/Ubunfu/page-flipper/pull/22)

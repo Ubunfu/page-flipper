@@ -63,4 +63,8 @@ router.post('/login', async (req, res) => {
     return res.redirect('/')
 })
 
+router.get('/logout', async (req, res) => {
+    return res.clearCookie('connect.sid').redirect('/login')
+})
+
 module.exports = router

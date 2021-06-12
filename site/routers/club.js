@@ -13,7 +13,9 @@ router.use(async (req, res, next) => {
 })
 
 router.get('/create', (req, res) => {
-    return res.render('clubCreate', {})
+    return res.render('clubCreate', {
+        isLoggedIn: true
+    })
 })
 
 router.post('/create', async (req, res) => {
@@ -48,7 +50,8 @@ router.get('/:clubId', async (req, res) => {
         isRequesterAdmin,
         clubAdmins,
         memberCount,
-        meetings
+        meetings,
+        isLoggedIn: true
     })
 })
 
@@ -59,7 +62,10 @@ router.get('/:clubId/edit', async (req, res) => {
         return res.redirect('/error/forbidden')
     }
     const club = await dbService.getClubById(req.params.clubId)
-    return res.render('clubEdit', { club })
+    return res.render('clubEdit', { 
+        club,
+        isLoggedIn: true
+    })
 })
 
 router.post('/:clubId/update', async (req, res) => {

@@ -1,5 +1,12 @@
 <header>
-    <a href="/">
-        <span class="title">Page Flipper</span>
-    </a>
+    <div class="title">
+        <a href="/">Page Flipper</a>
+    </div>
+    {{#if isLoggedIn}}
+        <div class="logout">
+            <a href="/logout">
+                <div class="logout-button">Logout</div>
+            </a>
+        </div>
+    {{/if}}
 </header>
