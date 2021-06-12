@@ -53,9 +53,10 @@ if (process.env.SESSION_STORE_PROVIDER == 'DYNAMODB') {
   sessionConfig.store = new DynamoDBStore(options)
 }
 app.use(session(sessionConfig))
-app.use(routers.main)
-app.use(routers.auth)
-app.use(routers.club)
+app.use('/', routers.main)
+app.use('/', routers.auth)
+app.use('/club', routers.club)
+app.use('/error', routers.errorRouter)
 
 if (process.env.LISTEN == 'true') {
   app.listen(process.env.LISTEN_PORT, () => {

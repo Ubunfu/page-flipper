@@ -9,6 +9,24 @@ body a {
     color: #444;
 }
 
+.error-banner {
+    font-size: 32px;
+    text-align: center;
+}
+
+.error-description {
+    font-size: 24px;
+    text-align: center;
+    margin: 16px 0;
+}
+
+.error-gif {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 0;
+}
+
 .splash {
     margin: 50px 0;
     text-align: center;
