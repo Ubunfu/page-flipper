@@ -11,28 +11,28 @@ async function findInvalidSignupFields(req) {
     try {
         await validateName(fName)
     } catch (error) {
-        console.log(`invalid first name`);
+        console.log(`[VALIDATORS] invalid first name`);
         invalidFields.push(`firstName`)
     }
 
     try {
         await validateName(lName)
     } catch (error) {
-        console.log(`invalid last name`);
+        console.log(`[SEC VALIDATORS] invalid last name`);
         invalidFields.push(`lastName`)
     }
 
     try {
         await validateEmail(email)
     } catch (error) {
-        console.log(`invalid email address`);
+        console.log(`[SEC VALIDATORS] invalid email address`);
         invalidFields.push(`email`)
     }
 
     try {
         await validatePassword(pass)
     } catch (error) {
-        console.log(`invalid password`);
+        console.log(`[SEC VALIDATORS] invalid password`);
         invalidFields.push(`password`)
     }
     

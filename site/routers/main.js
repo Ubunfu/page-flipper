@@ -18,9 +18,17 @@ router.get('/dashboard', async (req, res) => {
     }
 
     const decodedToken = await session.decodeToken(req.session.token)
-    const userRecord = await dbService.getUserById(decodedToken.subject)
+    let userRecord
+    try {
+        userRecord = await dbService.getUserById(decodedToken.subject)
+    } catch (error) {
+        console.log(`[RTR] [GET /dashboard] Error: ${error.message}`);
+        console.log(`[RTR] [GET /dashboard] Clearing session cookie and redirecting to /login...`);
+        return res.clearCookie('connect.sid').redirect('/login')
+    }
 
-    let clubs = await dbService.getClubsByUserId(userRecord.user_id)
+    let clubs = await dbService.getClubsByUserId(userRecord.userId)
+    clubs = enrichClubsWithIsAdminFlag(clubs)
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
@@ -42,5 +50,14 @@ router.get('/profile', async (req, res) => {
         user
     })
 })
+
+function enrichClubsWithIsAdminFlag(clubs) {
+    clubs.forEach(club => {
+        if (club.clubRole == 'ADMIN') {
+            club.isAdmin = true
+        }
+    });
+    return clubs
+}
 
 module.exports = router

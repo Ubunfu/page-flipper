@@ -28,7 +28,7 @@ router.post('/signup', async (req, res) => {
     try {
         // user already registered
         await dbService.getUserByEmail(req.body.email)
-        console.log(`user ${req.body.email} is already registered`);
+        console.log(`[RTR] [POST /signup] Error: user is already registered`);
         return res.redirect(`/signup?errors=id_registered`)
     } catch (error) {
         if (error.message === 'user_not_found') {
@@ -36,7 +36,7 @@ router.post('/signup', async (req, res) => {
             await auth.registerUser(req)
             return res.redirect('/')
         }
-        console.log(`Error: ${error.message}`);
+        console.log(`[RTR] [POST /signup] Error: ${error.message}`);
         return res.status(500).send('error registering user')
     }
 })
@@ -46,7 +46,7 @@ router.get('/login', async (req, res) => {
         await session.validateSession(req)
         return res.redirect('/dashboard')
     } catch (error) {
-        console.error(error);
+        console.error(`[RTR] [GET /login] Login Error: ${error.message}`);
         return res.render('login', {
             invalidCredentials: (req.query.error && req.query.error === 'invalid_credentials'),
             sessionExpired: (req.session.token ? true : false)

@@ -11,7 +11,7 @@ async function hashData(data) {
 
 async function checkHash(enteredData, hashedData) {
     if (!await argon2.verify(hashedData, enteredData)) {
-        console.error('hash check failed');
+        console.error('[SEC HASH] hash check failed');
         throw new Error('hash_check_failed')
     }
 }

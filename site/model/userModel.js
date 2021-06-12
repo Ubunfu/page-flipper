@@ -10,8 +10,8 @@ const { encoders } = require('../util')
  * @param {string} email email address of a user
  * @returns 
  */
-async function getUserById(pool, schemaName, user_id) {
-    const queryString = `select * from ${schemaName}.user where user_id = '${user_id}'`
+async function getUserById(pool, schemaName, userId) {
+    const queryString = `select * from ${schemaName}.user where "userId" = '${userId}'`
     const dbResp = await pool.query(queryString)
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
@@ -28,7 +28,7 @@ async function getUserById(pool, schemaName, user_id) {
  */
 async function getUserByEmail(pool, schemaName, email) {
     const encodedEmail = encoders.base64Encode(email)
-    const queryString = `select * from ${schemaName}.user where email = '${encodedEmail}'`
+    const queryString = `select * from ${schemaName}.user where "email" = '${encodedEmail}'`
     const dbResp = await pool.query(queryString)
     if (dbResp.rows.length < 1) {
         throw Error('user_not_found')
@@ -43,28 +43,28 @@ async function getUserByEmail(pool, schemaName, email) {
  * @param {object} userDetails A user object
  */
 async function saveUser(pool, schemaName, userDetails) {
-    const user_id = nanoid.nanoid()
+    const userId = nanoid.nanoid()
     const encodedEmail = encoders.base64Encode(userDetails.email)
     const encodedFirstName = encoders.base64Encode(userDetails.firstName)
     const encodedLastName = encoders.base64Encode(userDetails.lastName)
     const passHash = await hash.hashData(userDetails.password)
     const queryString = 
-        `insert into ${schemaName}.user (user_id, email, first_name, last_name, pass_hash) ` + 
-        `values ('${user_id}', '${encodedEmail}', '${encodedFirstName}', '${encodedLastName}', '${passHash}')`
+        `insert into ${schemaName}.user ("userId", "email", "firstName", "lastName", "passHash") ` + 
+        `values ('${userId}', '${encodedEmail}', '${encodedFirstName}', '${encodedLastName}', '${passHash}')`
     await pool.query(queryString)
     return {
-        user_id,
+        userId,
         email: userDetails.email,
-        first_name: userDetails.firstName,
-        last_name: userDetails.lastName
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName
     }
 }
 
 function decodeUserObject(user) {
     const decodedUser = user
     decodedUser.email = encoders.base64Decode(user.email)
-    decodedUser.first_name = encoders.base64Decode(user.first_name)
-    decodedUser.last_name = encoders.base64Decode(user.last_name)
+    decodedUser.firstName = encoders.base64Decode(user.firstName)
+    decodedUser.lastName = encoders.base64Decode(user.lastName)
     return decodedUser
 }
 

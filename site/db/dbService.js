@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Pool } = require('pg')
 const validator = require('validator')
-const { userModel, clubModel } = require('../model')
+const { userModel, clubModel, clubMemberModel, clubMeetingModel } = require('../model')
 
 const pool = new Pool({
     connectionString: process.env.DB_CONNECT_STRING
@@ -23,8 +23,8 @@ function getValidatedSchemaName(configSchemaName) {
     User Stuff
 */
 
-async function getUserById(user_id) {
-    return await userModel.getUserById(pool, schemaName, user_id)
+async function getUserById(userId) {
+    return await userModel.getUserById(pool, schemaName, userId)
 }
 
 async function getUserByEmail(email) {
@@ -51,8 +51,34 @@ async function saveClub(clubDetails) {
     return await clubModel.saveClub(pool, schemaName, clubDetails)
 }
 
-async function saveClubMember(club_id, user_id, club_role) {
-    return await clubModel.saveClubMember(pool, schemaName, club_id, user_id, club_role)
+async function updateClub(clubDetails) {
+    return await clubModel.updateClub(pool, schemaName, clubDetails)
+}
+
+async function saveClubMember(clubId, userId, clubRole) {
+    return await clubModel.saveClubMember(pool, schemaName, clubId, userId, clubRole)
+}
+
+/*
+    Club Member Stuff
+*/
+async function getClubMember(clubId, userId) {
+    return await clubMemberModel.getClubMember(pool, schemaName, clubId, userId)
+}
+
+async function getClubMembersWithRole(clubId, clubRole) {
+    return await clubMemberModel.getClubMembersWithRole(pool, schemaName, clubId, clubRole)
+}
+
+async function getClubMemberCount(clubId) {
+    return await clubMemberModel.getClubMemberCount(pool, schemaName, clubId)
+}
+
+/*
+    Club Meeting Stuff
+*/
+async function getClubMeetings(clubId) {
+    return await clubMeetingModel.getClubMeetings(pool, schemaName, clubId)
 }
 
 module.exports = {
@@ -62,5 +88,10 @@ module.exports = {
     getClubById,
     getClubsByUserId,
     saveClub,
+    updateClub,
     saveClubMember,
+    getClubMember,
+    getClubMembersWithRole,
+    getClubMemberCount,
+    getClubMeetings,
 }

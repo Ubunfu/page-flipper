@@ -10,14 +10,14 @@ const { encoders } = require('../util')
  */
 async function getClubById(pool, schemaName, id) {
     const queryString = 
-    `select * from ${schemaName}.club where club_id = '${id}'`
+    `select * from ${schemaName}.club where "clubId" = '${id}'`
     const dbResponse = await pool.query(queryString)
     const dbRow = dbResponse.rows[0]
     const decodedResponse = {
-        clubId: dbRow.club_id,
-        clubName: encoders.base64Decode(dbRow.club_name),
-        clubDesc: encoders.base64Decode(dbRow.club_desc),
-        iconUrl: encoders.base64Decode(dbRow.club_icon_url)
+        clubId: dbRow.clubId,
+        clubName: encoders.base64Decode(dbRow.clubName),
+        clubDesc: encoders.base64Decode(dbRow.clubDesc),
+        clubIconUrl: encoders.base64Decode(dbRow.clubIconUrl)
     }
     return decodedResponse
 }
@@ -30,8 +30,8 @@ async function getClubById(pool, schemaName, id) {
  */
 async function getClubsByUserId(pool, schemaName, userId) {
     const queryString = 
-        `select c.club_id, c.club_name, c.club_desc, c.club_icon_url, m.user_id, m.club_role from ${schemaName}.club as c ` +
-        `inner join ${schemaName}.club_member as m on c.club_id=m.club_id where m.user_id = '${userId}'`
+        `select c."clubId", c."clubName", c."clubDesc", c."clubIconUrl", m."userId", m."clubRole" from ${schemaName}.club as c ` +
+        `inner join ${schemaName}.club_member as m on c."clubId"=m."clubId" where m."userId" = '${userId}'`
     const dbResponse = await pool.query(queryString)
     const clubs = dbResponse.rows
     return decodeClubsByUserIdResp(clubs)
@@ -39,9 +39,9 @@ async function getClubsByUserId(pool, schemaName, userId) {
 
 function decodeClubsByUserIdResp(clubs) {
     clubs.forEach(club => {
-        club.club_name = encoders.base64Decode(club.club_name)
-        club.club_desc = encoders.base64Decode(club.club_desc)
-        club.club_icon_url = encoders.base64Decode(club.club_icon_url)
+        club.clubName = encoders.base64Decode(club.clubName)
+        club.clubDesc = encoders.base64Decode(club.clubDesc)
+        club.clubIconUrl = encoders.base64Decode(club.clubIconUrl)
     });
     return clubs
 }
@@ -54,15 +54,33 @@ function decodeClubsByUserIdResp(clubs) {
  * @returns {string} ID of the created club
  */
 async function saveClub(pool, schemaName, clubDetails) {
-    const club_id = nanoid.nanoid()
-    const encodedClubName = encoders.base64Encode(clubDetails.club_name)
-    const encodedClubDesc = encoders.base64Encode(clubDetails.club_desc)
-    const encodedClubIconUrl = encoders.base64Encode(clubDetails.club_icon_url)
+    const clubId = nanoid.nanoid()
+    const encodedClubName = encoders.base64Encode(clubDetails.clubName)
+    const encodedClubDesc = encoders.base64Encode(clubDetails.clubDesc)
+    const encodedClubIconUrl = encoders.base64Encode(clubDetails.clubIconUrl)
     const queryString = 
-        `insert into ${schemaName}.club (club_id, club_name, club_desc, club_icon_url) ` + 
-        `values ('${club_id}', '${encodedClubName}', '${encodedClubDesc}', '${encodedClubIconUrl}')`
+        `insert into ${schemaName}.club ("clubId", "clubName", "clubDesc", "clubIconUrl") ` + 
+        `values ('${clubId}', '${encodedClubName}', '${encodedClubDesc}', '${encodedClubIconUrl}')`
     await pool.query(queryString)
-    return club_id
+    return clubId
+}
+
+/**
+ * Updates a club in the database
+ * @param {Pool} pool database connection pool
+ * @param {string} schemaName name of the database schema
+ * @param {object} clubDetails
+ */
+async function updateClub(pool, schemaName, clubDetails) {
+    const clubId = clubDetails.clubId
+    const encodedClubName = encoders.base64Encode(clubDetails.clubName)
+    const encodedClubDesc = encoders.base64Encode(clubDetails.clubDesc)
+    const encodedClubIconUrl = encoders.base64Encode(clubDetails.clubIconUrl)
+    const queryString = 
+        `update ${schemaName}.club ` + 
+        `set "clubName" = '${encodedClubName}', "clubDesc" = '${encodedClubDesc}', "clubIconUrl" = '${encodedClubIconUrl}' ` +
+        `where "clubId" = '${clubId}'`
+    await pool.query(queryString)
 }
 
 /**
@@ -72,17 +90,18 @@ async function saveClub(pool, schemaName, clubDetails) {
  * @param {string} schemaName name of the database schema
  * @param {object} clubDetails 
  * @returns {string} ID of the created club
- */
-async function saveClubMember(pool, schemaName, club_id, user_id, club_role) {
+ */ 
+async function saveClubMember(pool, schemaName, clubId, userId, clubRole) {
     const queryString = 
-        `insert into ${schemaName}.club_member (club_id, user_id, club_role) ` + 
-        `values ('${club_id}', '${user_id}', '${club_role}')`
-    await pool.query(queryString)
-}
+        `insert into ${schemaName}.club_member ("clubId", "userId", "clubRole") ` + 
+        `values ('${clubId}', '${userId}', '${clubRole}')`
+    await pool.query(queryString)    
+}    
 
 module.exports = {
     getClubById,
     getClubsByUserId,
     saveClub,
+    updateClub,
     saveClubMember,
 }

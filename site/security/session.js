@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 async function createSession(req, user) {
-    const tokenPayload = { subject: user.user_id }
+    const tokenPayload = { subject: user.userId }
     const token = await createToken(tokenPayload)
     req.session.token = token
 }
@@ -13,7 +13,7 @@ async function validateSession(req) {
     try {
         jwt.verify(req.session.token, process.env.SESSION_SECRET)
     } catch (error) {
-        console.log(error);
+        console.log(`[SEC SESSION] Error validating token: ${error.message}`);
         throw new Error('invalid_session')
     }
 }

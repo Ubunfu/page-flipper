@@ -5,13 +5,13 @@ const { dbService } = require('../db')
 async function authenticateUser(req) {
     const email = req.body.email
     const enteredPassword = req.body.password
-    console.log(`looking for a user with email: ${email}`);
+    console.log(`[SEC AUTH] attempting to authenticate user...`);
     const user = await dbService.getUserByEmail(email) // throws 'user_not_found'
-    console.log('checking hash...');
-    await hash.checkHash(enteredPassword, user.pass_hash)
-    console.log('creating session...');
+    console.log('[SEC AUTH] checking hash...');
+    await hash.checkHash(enteredPassword, user.passHash)
+    console.log('[SEC AUTH] creating session...');
     await session.createSession(req, user)
-    console.log('created session!');
+    console.log('[SEC AUTH] created session!');
 }
 
 async function registerUser(req) {
