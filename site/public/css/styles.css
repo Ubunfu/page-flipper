@@ -1,3 +1,35 @@
+/*
+    Styling for the top page header
+*/
+header {
+    display: flex;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 25px 0;
+    border-bottom: 1px solid #444;
+}
+
+header .title {
+    flex: 4;
+    font-size: 34px;
+}
+
+header .logout {
+    margin-right: 24px;
+    width: 10%;
+    min-width: 100px;
+}
+
+header .logout-button {
+    background-color: #282;
+    padding: 10px;
+    margin: 0 5px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+
 body {
     color: #333;
     background-color: antiquewhite;
@@ -9,6 +41,9 @@ body a {
     color: #444;
 }
 
+/*
+    Styling for the error page
+*/
 .error-banner {
     font-size: 32px;
     text-align: center;
@@ -63,17 +98,6 @@ body a {
 .club-buttons a {
     color: white;
     font-size: 24px;
-}
-
-header {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 25px 0;
-    border-bottom: 1px solid #444;
-}
-
-header .title {
-    font-size: 34px;
 }
 
 .signup-form {

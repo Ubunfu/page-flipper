@@ -32,7 +32,8 @@ router.get('/dashboard', async (req, res) => {
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
-        clubs
+        clubs,
+        isLoggedIn: true
     })
 })
 
@@ -47,7 +48,8 @@ router.get('/profile', async (req, res) => {
     const user = await dbService.getUserById(decodedToken.subject)
 
     return res.render('profile', {
-        user
+        user,
+        isLoggedIn: true
     })
 })
 
