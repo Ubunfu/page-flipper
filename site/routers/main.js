@@ -28,6 +28,7 @@ router.get('/dashboard', async (req, res) => {
     }
 
     let clubs = await dbService.getClubsByUserId(userRecord.userId)
+    clubs = enrichClubsWithIsAdminFlag(clubs)
     
     return res.render('dashboard', {
         hasClubs: (clubs.length > 0 ? true : false),
@@ -49,5 +50,14 @@ router.get('/profile', async (req, res) => {
         user
     })
 })
+
+function enrichClubsWithIsAdminFlag(clubs) {
+    clubs.forEach(club => {
+        if (club.clubRole == 'ADMIN') {
+            club.isAdmin = true
+        }
+    });
+    return clubs
+}
 
 module.exports = router

@@ -10,7 +10,13 @@
                     <div class="club-metadata">
                         <div class="club-name">{{clubName}}</div>
                         <div class="club-description">{{clubDesc}}</div>
-                        <div class="club-role">Role: {{clubRole}}</div>
+                        <div class="club-role">
+                            {{#if isAdmin}}
+                                <img src="https://img.shields.io/badge/ROLE-ADMIN-brightgreen" alt="">
+                            {{else}}
+                                <img src="https://img.shields.io/badge/ROLE-MEMBER-blue" alt="">
+                            {{/if}}
+                        </div>
                     </div>
                 </div>
             </a>
