@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Page Flipper - Club</title>
+    <title>Page Flipper - Club Meeting</title>
 </head>
 <body>
     {{>header}}
     {{>navBar}}
-    <div class="main-content club-home">
+    <div class="main-content club-meeting">
         <div class="club-meta-col">
             <div class="club-icon">
                 <img src="{{club.clubIconUrl}}" alt="">
@@ -18,7 +18,7 @@
             <div class="club-title">
                 {{club.clubName}}
             </div>
-            <div class="club-meta-sec club-desc">
+            <div class="club-meta-sec meeting-desc">
                 {{club.clubDesc}}
             </div>
             <div class="club-meta-sec club-admins">
@@ -37,37 +37,39 @@
                     <div class="club-meta-sec-title">Admin Tools:</div>
                     <div class="buttons">
                         <div class="button-link">
-                            <a href="/club/{{club.clubId}}/edit">
-                                <div class="button">Edit Club</div>
-                            </a>
-                        </div>
-                        <div class="button-link">
-                            <a href="/club/{{club.clubId}}/scheduleMeeting">
-                                <div class="button">Schedule Meeting</div>
+                            <a href="/club/{{club.clubId}}/meeting/{{meetingId}}/edit">
+                                <div class="button">Edit Meeting</div>
                             </a>
                         </div>
                     </div>
                 </div>
             {{/if}}
         </div>
-        <div class="club-timeline">
-            <div class="timeline-heading">
-                Club Meetings
+        <div class="meeting-content">
+            <div class="content-heading">
+                {{meeting.bookTitle}} by {{meeting.bookAuthor}}
             </div>
-            {{#each meetings }}
-                <a href="/club/{{clubId}}/meeting/{{meetingId}}">
-                    <div class="club-meeting">
-                        <div class="book-icon">
-                            <img src="{{bookIconUrl}}" alt="">
-                        </div>
-                        <div class="book-meta">
-                            <div class="book-title">{{bookTitle}}</div>
-                            <div class="book-author">{{bookAuthor}}</div>
-                        </div>
-                        <div class="meeting-date"><span>{{meetingDate}}</span></div>
+            <div class="content-subheading">
+                {{meeting.meetingDate}}
+            </div>
+            <nav class="nav-bar nav-meeting">
+                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}"><span>Discussion</span></a>
+                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}/reviews"><span>Reviews</span></a>
+            </nav>
+            <div class="discussion-post-comment">
+                <form action="/club/{{clubId}}/meeting/{{meetingId}}/comment" method="post">
+                    <input type="text" name="comment" required placeholder="Post a new comment...">
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+            <div class="meeting-discussion">
+                {{#each meetingComments}}
+                    <div class="meeting-comment">
+                        <div class="comment-tag">{{firstName}} {{lastName}}:</div>
+                        <div class="comment-data">{{comment}}</div>
                     </div>
-                </a>
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
     </div>
 </body>

@@ -83,6 +83,68 @@ router.post('/:clubId/update', async (req, res) => {
     return res.redirect(`/club/${clubId}`)
 })
 
+router.get('/:clubId/meeting/:meetingId', async (req, res) => {
+    const clubId = req.params.clubId
+    // const meetingId = req.parems.meetingId
+
+    // Get Club
+    const club = await dbService.getClubById(clubId)
+
+    // Get list of club meetings
+    // const meeting = await dbService.getClubMeeting(meetingId)
+    const meeting = {
+        meetingId: '12345',
+        clubId: '4_XXNXfJBwXIvEdtnFhBF',
+        meetingDate: 'June 9th, 2021',
+        bookIconUrl: 'https://openlibrary.org/static/images/openlibrary-logo-tighter.svg',
+        bookTitle: 'The Stand',
+        bookAuthor: 'Stephen King',
+        bookIsbn: null
+    }
+
+    const meetingComments = [
+        {
+            commentId: '1',
+            meetingId: '12345',
+            userId: 'y4hhy4Gz-xhz97ItGN8pE',
+            firstName: 'Ryan',
+            lastName: 'Allen',
+            timestamp: '001',
+            comment: 'Test comment'
+        },
+        {
+            commentId: '2',
+            meetingId: '12345',
+            userId: 'y4hhy4Gz-xhz97ItGN8pE',
+            firstName: 'Ryan',
+            lastName: 'Allen',
+            timestamp: '002',
+            comment: 'Test another comment'
+        }
+    ]
+
+    // Get list of club admins
+    const clubAdmins = await dbService.getClubMembersWithRole(clubId, 'ADMIN')
+    
+    // Check if current user is a club admin
+    const decodedToken = await session.decodeToken(req.session.token)
+    const userId = decodedToken.subject
+    let isRequesterAdmin = await userHasClubRole(userId, clubId, 'ADMIN')
+
+    // Get count of club members
+    const memberCount = await dbService.getClubMemberCount(clubId)
+
+    return res.render('clubMeeting', {
+        meeting,
+        meetingComments,
+        club,
+        isRequesterAdmin,
+        clubAdmins,
+        memberCount,
+        isLoggedIn: true
+    })
+})
+
 async function userHasClubRole(userId, clubId, clubRole) {
     const membersWithRole = await dbService.getClubMembersWithRole(clubId, clubRole)
     let hasRole = false
