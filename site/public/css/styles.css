@@ -485,6 +485,10 @@ body a {
     flex: 1;
 }
 
+.club-edit-content .club-img img {
+    max-width: 150px;
+}
+
 .club-edit-content .club-data {
     flex: 3;
 }
