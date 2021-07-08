@@ -93,6 +93,11 @@ async function getClubMeetingComments(meetingId) {
     return await clubMeetingModel.getClubMeetingComments(pool, schemaName, meetingId)
 }
 
+async function saveClubMeeting(bookTitle, bookAuthor, bookIconUrl, bookIsbn, meetingDate, clubId) {
+    return await clubMeetingModel.saveClubMeeting(
+        pool, schemaName, bookTitle, bookAuthor, bookIconUrl, bookIsbn, meetingDate, clubId)
+}
+
 module.exports = {
     getUserById,
     getUserByEmail,
@@ -108,5 +113,6 @@ module.exports = {
     getClubMeetings,
     saveClubMeetingComment,
     getClubMeetingComments,
-    getClubMeetingById
+    getClubMeetingById,
+    saveClubMeeting
 }

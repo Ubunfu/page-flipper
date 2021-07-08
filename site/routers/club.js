@@ -55,6 +55,28 @@ router.get('/:clubId', async (req, res) => {
     })
 })
 
+router.get('/:clubId/meeting/schedule', async (req, res) => {
+    const clubId = req.params.clubId
+    return res.render('clubMeetingSchedule', {
+        clubId,
+        isLoggedIn: true
+    })
+})
+
+router.post('/:clubId/meeting/schedule', async (req, res) => {
+    const bookTitle = req.body.bookTitle
+    const bookAuthor = req.body.bookAuthor
+    const bookIconUrl = req.body.bookIconUrl
+    const bookIsbn = req.body.bookIsbn
+    const meetingDate = req.body.meetingDate
+    const clubId = req.params.clubId
+
+    await dbService.saveClubMeeting(
+        bookTitle, bookAuthor, bookIconUrl, bookIsbn, meetingDate, clubId)
+
+    return res.redirect(`/club/${clubId}`)
+})
+
 router.get('/:clubId/edit', async (req, res) => {
     const decodedToken = await session.decodeToken(req.session.token)
     const userId = decodedToken.subject

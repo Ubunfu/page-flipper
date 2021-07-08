@@ -42,7 +42,7 @@
                             </a>
                         </div>
                         <div class="button-link">
-                            <a href="/club/{{club.clubId}}/scheduleMeeting">
+                            <a href="/club/{{club.clubId}}/meeting/schedule">
                                 <div class="button">Schedule Meeting</div>
                             </a>
                         </div>
@@ -54,20 +54,27 @@
             <div class="timeline-heading">
                 Club Meetings
             </div>
-            {{#each meetings }}
-                <a href="/club/{{clubId}}/meeting/{{meetingId}}">
-                    <div class="club-meeting">
-                        <div class="book-icon">
-                            <img src="{{bookIconUrl}}" alt="">
+            {{#if meetings}}
+                {{#each meetings }}
+                    <a href="/club/{{clubId}}/meeting/{{meetingId}}">
+                        <div class="club-meeting">
+                            <div class="book-icon">
+                                <img src="{{bookIconUrl}}" alt="">
+                            </div>
+                            <div class="book-meta">
+                                <div class="book-title">{{bookTitle}}</div>
+                                <div class="book-author">{{bookAuthor}}</div>
+                            </div>
+                            <div class="meeting-date"><span>{{meetingDate}}</span></div>
                         </div>
-                        <div class="book-meta">
-                            <div class="book-title">{{bookTitle}}</div>
-                            <div class="book-author">{{bookAuthor}}</div>
-                        </div>
-                        <div class="meeting-date"><span>{{meetingDate}}</span></div>
-                    </div>
-                </a>
-            {{/each}}
+                    </a>
+                {{/each}}
+            {{else}}
+                <div class="empty-comment">
+                    <img src="https://i.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg">
+                    <p>No meetings yet? Wow...</p>
+                </div>
+            {{/if}}
         </div>
     </div>
 </body>

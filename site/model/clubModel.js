@@ -96,12 +96,12 @@ async function saveClubMember(pool, schemaName, clubId, userId, clubRole) {
         `insert into ${schemaName}.club_member ("clubId", "userId", "clubRole") ` + 
         `values ('${clubId}', '${userId}', '${clubRole}')`
     await pool.query(queryString)    
-}    
+}
 
 module.exports = {
     getClubById,
     getClubsByUserId,
     saveClub,
     updateClub,
-    saveClubMember,
+    saveClubMember
 }
