@@ -65,7 +65,7 @@ CREATE TABLE pf.club_meeting
     "bookIconUrl" character varying,
     "bookTitle" character varying(128) NOT NULL,
     "bookAuthor" character varying(128) NOT NULL,
-    "bookIsbn" character varying(16),
+    "bookIsbn" character varying(32),
     PRIMARY KEY ("meetingId"),
     CONSTRAINT "CLUB_MEETING_FK_1" FOREIGN KEY ("clubId")
         REFERENCES pf.club ("clubId") MATCH SIMPLE
