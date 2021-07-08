@@ -197,6 +197,11 @@ body a {
     padding: 8px 0;
 }
 
+.nav-active {
+    border-top: 1px solid #444;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 .main-content {
     max-width: 750px;
     width: 100%;
@@ -585,7 +590,7 @@ list-style: none;
     Styles for the club meeting discussions
 */
 .discussion-post-comment {
-    /* border: 3px solid rgba(34, 136, 34, 0.75); */
+    padding: 5px 0;
 }
 
 .discussion-post-comment form {
@@ -605,6 +610,30 @@ list-style: none;
     background-color: rgb(255, 245, 233);
 }
 
+.empty-comment {
+    text-align: center;
+    font-weight: bold;
+}
+
 .meeting-comment {
     padding: 10px;
+}
+
+.meeting-comment .comment-tag {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.meeting-comment .comment-tag .handle {
+    flex: 4;
+    text-align: left;
+    font-weight: bold;
+}
+
+.meeting-comment .comment-tag .timestamp {
+    flex: 1;
+    text-align: right;
+    color: #777;
 }

@@ -53,22 +53,32 @@
                 {{meeting.meetingDate}}
             </div>
             <nav class="nav-bar nav-meeting">
-                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}"><span>Discussion</span></a>
+                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}" class="nav-active"><span>Discussion</span></a>
                 <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}/reviews"><span>Reviews</span></a>
             </nav>
             <div class="discussion-post-comment">
-                <form action="/club/{{clubId}}/meeting/{{meetingId}}/comment" method="post">
+                <form action="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}/comment" method="post">
                     <input type="text" name="comment" required placeholder="Post a new comment...">
+                    <input type="hidden" name="userId" value="{{userId}}">
                     <button type="submit">Post</button>
                 </form>
             </div>
             <div class="meeting-discussion">
-                {{#each meetingComments}}
-                    <div class="meeting-comment">
-                        <div class="comment-tag">{{firstName}} {{lastName}}:</div>
-                        <div class="comment-data">{{comment}}</div>
+                {{#if meetingComments}}
+                    {{#each meetingComments}}
+                        <div class="meeting-comment">
+                            <div class="comment-tag">
+                                <div class="handle">{{firstName}} {{lastName}}</div>
+                                <div class="timestamp">{{commentTimestamp}}</div>
+                            </div>
+                            <div class="comment-data">{{comment}}</div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <div class="empty-comment">
+                        Wow, such quiet in here...
                     </div>
-                {{/each}}
+                {{/if}}
             </div>
         </div>
     </div>

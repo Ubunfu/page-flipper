@@ -83,45 +83,28 @@ router.post('/:clubId/update', async (req, res) => {
     return res.redirect(`/club/${clubId}`)
 })
 
+router.post('/:clubId/meeting/:meetingId/comment', async (req, res) => {
+    const clubId = req.params.clubId
+    const meetingId = req.params.meetingId
+    const comment = req.body.comment
+    const commentUserId = req.body.userId
+
+    await dbService.saveClubMeetingComment(meetingId, commentUserId, comment)
+
+    return res.redirect(`/club/${clubId}/meeting/${meetingId}`)
+})
+
 router.get('/:clubId/meeting/:meetingId', async (req, res) => {
     const clubId = req.params.clubId
-    // const meetingId = req.parems.meetingId
+    const meetingId = req.params.meetingId
 
     // Get Club
     const club = await dbService.getClubById(clubId)
 
     // Get list of club meetings
-    // const meeting = await dbService.getClubMeeting(meetingId)
-    const meeting = {
-        meetingId: '12345',
-        clubId: '4_XXNXfJBwXIvEdtnFhBF',
-        meetingDate: 'June 9th, 2021',
-        bookIconUrl: 'https://openlibrary.org/static/images/openlibrary-logo-tighter.svg',
-        bookTitle: 'The Stand',
-        bookAuthor: 'Stephen King',
-        bookIsbn: null
-    }
+    const meeting = await dbService.getClubMeetingById(meetingId)
 
-    const meetingComments = [
-        {
-            commentId: '1',
-            meetingId: '12345',
-            userId: 'y4hhy4Gz-xhz97ItGN8pE',
-            firstName: 'Ryan',
-            lastName: 'Allen',
-            timestamp: '001',
-            comment: 'Test comment'
-        },
-        {
-            commentId: '2',
-            meetingId: '12345',
-            userId: 'y4hhy4Gz-xhz97ItGN8pE',
-            firstName: 'Ryan',
-            lastName: 'Allen',
-            timestamp: '002',
-            comment: 'Test another comment'
-        }
-    ]
+    const meetingComments = await dbService.getClubMeetingComments(meeting.meetingId)
 
     // Get list of club admins
     const clubAdmins = await dbService.getClubMembersWithRole(clubId, 'ADMIN')
@@ -135,6 +118,7 @@ router.get('/:clubId/meeting/:meetingId', async (req, res) => {
     const memberCount = await dbService.getClubMemberCount(clubId)
 
     return res.render('clubMeeting', {
+        userId,
         meeting,
         meetingComments,
         club,
