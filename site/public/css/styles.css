@@ -623,6 +623,12 @@ list-style: none;
     font-weight: bold;
 }
 
+.empty-comment img {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+}
+
 .meeting-comment {
     padding: 10px;
 }
