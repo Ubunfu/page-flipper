@@ -219,7 +219,7 @@ body a {
 }
 
 .club-list-title,
-.club-create-title {
+.content-create-container-heading {
     font-size: 24px;
     padding-bottom: 36px;
     text-align: center;
@@ -261,6 +261,9 @@ body a {
     margin-top:16px;
 }
 
+/*
+    Styling for profile page
+*/
 .profile-content {
     display: flex;
     font-size: 18px;
@@ -284,13 +287,17 @@ body a {
     padding: 10px 0;
 }
 
-.club-create-content form {
+/*
+    Styling for a generic content creation form
+    Used for creating clubs, meetings, etc
+*/
+.content-create-container form {
     display: grid;
     gap: 16px;
 }
 
-.club-create-content form input,
-.club-create-content form textarea,
+.content-create-container form input,
+.content-create-container form textarea,
 .club-edit-content .club-edit-form input,
 .club-edit-content .club-edit-form textarea {
     resize: none;
@@ -300,7 +307,7 @@ body a {
     padding: 5px;
 }
 
-.club-create-content button,
+.content-create-container button,
 .club-edit-form-buttons button {
     width: 90%;
     max-width: 200px;
@@ -308,7 +315,7 @@ body a {
     font-size: 16px;
 }
 
-.club-create-form-buttons,
+.content-create-container-buttons,
 .club-edit-form-buttons {
     display: flex;
     width: 90%;
@@ -316,7 +323,7 @@ body a {
     margin: 0 auto;
 }
 
-.club-create-form-buttons button {
+.content-create-container-buttons button {
     flex: auto;
 }
 
@@ -447,6 +454,7 @@ body a {
 
 .club-home .book-icon img {
     max-width: 100px;
+    max-height: 100px;
 }
 
 .club-home .book-meta {

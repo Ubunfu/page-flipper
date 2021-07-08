@@ -1,6 +1,7 @@
 const { encoders } = require('../util')
 const { format, formatISO9075 } = require('date-fns')
 const nanoid = require('nanoid')
+const validator = require('validator')
 
 /**
  * Returns the set of all meetings scheduled for a given club
@@ -62,6 +63,32 @@ async function getClubMeetingComments(pool, schemaName, meetingId) {
     return decodeCommentArray(dbResponse.rows)
 }
 
+async function saveClubMeeting(pool, schemaName, bookTitle, bookAuthor, bookIconUrl, bookIsbn, meetingDate, clubId) {
+    const meetingId = nanoid.nanoid()
+    const encodedBookTitle = encoders.base64Encode(bookTitle)
+    const encodedBookAuthor = encoders.base64Encode(bookAuthor)
+    const encodedBookIconUrl = encoders.base64Encode(bookIconUrl)
+    const encodedBookIsbn = encoders.base64Encode(bookIsbn)
+    const encodedMeetingDate = validateMeetingDateFormat(meetingDate)
+    const queryString = 
+        `insert into ${schemaName}."club_meeting" ` +
+        `("meetingId", "bookTitle", "bookAuthor", "bookIconUrl", "bookIsbn", "meetingDate", "clubId") ` + 
+        `values ('${meetingId}', '${encodedBookTitle}', '${encodedBookAuthor}', '${encodedBookIconUrl}', '${encodedBookIsbn}', '${encodedMeetingDate}', '${clubId}')`
+    await pool.query(queryString)
+}
+
+function validateMeetingDateFormat(meetingDate) {
+    const formatOptions = {
+        format: 'YYYY-MM-DD',
+        strictMode: true
+    }
+    if (! validator.isDate(meetingDate, formatOptions)) {
+        console.log(`[MODEL CLUBMEETINGMODEL] invalid meeting date: ${meetingDate}`);
+        throw Error('invalid_date')
+    }
+    return meetingDate
+}
+
 function decodeCommentArray(encodedComments) {
     let decodedComments = []
     encodedComments.forEach(encodedComment => {
@@ -105,5 +132,6 @@ module.exports = {
     getClubMeetings,
     getClubMeetingById,
     saveClubMeetingComment,
-    getClubMeetingComments
+    getClubMeetingComments,
+    saveClubMeeting
 }

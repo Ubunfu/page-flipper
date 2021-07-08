@@ -12,4 +12,5 @@ I like [semantic versioning](https://semver.org/), so this project conforms to i
 * [documentation] [Updating docs for running outside of AWS](https://github.com/Ubunfu/page-flipper/pull/14)
 * [feature] [Adding club detail page](https://github.com/Ubunfu/page-flipper/pull/15)
 * [feature] [Adding Logout button](https://github.com/Ubunfu/page-flipper/pull/22)
-* [feature] [Adding club meeting page](https://github.com/Ubunfu/page-flipper/pull/)
+* [feature] [Adding club meeting page](https://github.com/Ubunfu/page-flipper/pull/23)
+* [feature] [Allow scheduling club meetings](https://github.com/Ubunfu/page-flipper/pull/)

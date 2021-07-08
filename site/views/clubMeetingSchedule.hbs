@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Page Flipper - Schedule a Meeting</title>
+</head>
+<body>
+    {{>header}}
+    {{>navBar}}
+    <div class="main-content">
+        <div class="content-create-container">
+            <div class="content-create-container-heading">Schedule a Club Meeting</div>
+            <form action="/club/{{clubId}}/meeting/schedule" method="post" class="content-create-form">
+                <label for="bookTitle">Book Title</label>
+                <input required type="text" name="bookTitle" placeholder="Pet Semetary">
+                <label for="bookAuthor">Book Author</label>
+                <input required type="text" name="bookAuthor" placeholder="Stephen King">
+                <label for="bookIconUrl">Book Icon URL</label>
+                <input type="url" name="bookIconUrl" placeholder="https://covers.openlibrary.org/b/id/10712850-L.jpg">
+                <label for="bookIsbn">Book ISBN</label>
+                <input type="text" name="bookIsbn" placeholder="9782724278484">
+                <label for="meetingDate">Meeting Date</label>
+                <input required type="date" name="meetingDate">
+                <div class="content-create-container-buttons">
+                    <button type="submit">Schedule Meeting</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
