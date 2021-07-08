@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Page Flipper - Club Meeting</title>
+</head>
+<body>
+    {{>header}}
+    {{>navBar}}
+    <div class="main-content club-meeting">
+        <div class="club-meta-col">
+            <div class="club-icon">
+                <img src="{{club.clubIconUrl}}" alt="">
+            </div>
+            <div class="club-title">
+                {{club.clubName}}
+            </div>
+            <div class="club-meta-sec meeting-desc">
+                {{club.clubDesc}}
+            </div>
+            <div class="club-meta-sec club-admins">
+                <div class="club-meta-sec-title">Club Admins:</div>
+                <ul>
+                    {{#each clubAdmins}}
+                        <li>{{firstName}} {{lastName}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="club-meta-sec club-size">
+                <div class="club-meta-sec-title">Member Count: {{memberCount}}</div>
+            </div>
+            {{#if isRequesterAdmin}}
+                <div class="club-meta-sec admin-tools">
+                    <div class="club-meta-sec-title">Admin Tools:</div>
+                    <div class="buttons">
+                        <div class="button-link">
+                            <a href="/club/{{club.clubId}}/meeting/{{meetingId}}/edit">
+                                <div class="button">Edit Meeting</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        <div class="meeting-content">
+            <div class="content-heading">
+                {{meeting.bookTitle}} by {{meeting.bookAuthor}}
+            </div>
+            <div class="content-subheading">
+                {{meeting.meetingDate}}
+            </div>
+            <nav class="nav-bar nav-meeting">
+                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}" class="nav-active"><span>Discussion</span></a>
+                <a href="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}/reviews"><span>Reviews</span></a>
+            </nav>
+            <div class="discussion-post-comment">
+                <form action="/club/{{club.clubId}}/meeting/{{meeting.meetingId}}/comment" method="post">
+                    <input type="text" name="comment" required placeholder="Post a new comment...">
+                    <input type="hidden" name="userId" value="{{userId}}">
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+            <div class="meeting-discussion">
+                {{#if meetingComments}}
+                    {{#each meetingComments}}
+                        <div class="meeting-comment">
+                            <div class="comment-tag">
+                                <div class="handle">{{firstName}} {{lastName}}</div>
+                                <div class="timestamp">{{commentTimestamp}}</div>
+                            </div>
+                            <div class="comment-data">{{comment}}</div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <div class="empty-comment">
+                        Wow, such quiet in here...
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

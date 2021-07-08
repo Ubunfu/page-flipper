@@ -83,6 +83,52 @@ router.post('/:clubId/update', async (req, res) => {
     return res.redirect(`/club/${clubId}`)
 })
 
+router.post('/:clubId/meeting/:meetingId/comment', async (req, res) => {
+    const clubId = req.params.clubId
+    const meetingId = req.params.meetingId
+    const comment = req.body.comment
+    const commentUserId = req.body.userId
+
+    await dbService.saveClubMeetingComment(meetingId, commentUserId, comment)
+
+    return res.redirect(`/club/${clubId}/meeting/${meetingId}`)
+})
+
+router.get('/:clubId/meeting/:meetingId', async (req, res) => {
+    const clubId = req.params.clubId
+    const meetingId = req.params.meetingId
+
+    // Get Club
+    const club = await dbService.getClubById(clubId)
+
+    // Get list of club meetings
+    const meeting = await dbService.getClubMeetingById(meetingId)
+
+    const meetingComments = await dbService.getClubMeetingComments(meeting.meetingId)
+
+    // Get list of club admins
+    const clubAdmins = await dbService.getClubMembersWithRole(clubId, 'ADMIN')
+    
+    // Check if current user is a club admin
+    const decodedToken = await session.decodeToken(req.session.token)
+    const userId = decodedToken.subject
+    let isRequesterAdmin = await userHasClubRole(userId, clubId, 'ADMIN')
+
+    // Get count of club members
+    const memberCount = await dbService.getClubMemberCount(clubId)
+
+    return res.render('clubMeeting', {
+        userId,
+        meeting,
+        meetingComments,
+        club,
+        isRequesterAdmin,
+        clubAdmins,
+        memberCount,
+        isLoggedIn: true
+    })
+})
+
 async function userHasClubRole(userId, clubId, clubRole) {
     const membersWithRole = await dbService.getClubMembersWithRole(clubId, clubRole)
     let hasRole = false

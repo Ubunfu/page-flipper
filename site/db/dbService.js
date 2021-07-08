@@ -81,6 +81,18 @@ async function getClubMeetings(clubId) {
     return await clubMeetingModel.getClubMeetings(pool, schemaName, clubId)
 }
 
+async function getClubMeetingById(meetingId) {
+    return await clubMeetingModel.getClubMeetingById(pool, schemaName, meetingId)
+}
+
+async function saveClubMeetingComment(meetingId, userId, comment) {
+    return await clubMeetingModel.saveClubMeetingComment(pool, schemaName, meetingId, userId, comment)
+}
+
+async function getClubMeetingComments(meetingId) {
+    return await clubMeetingModel.getClubMeetingComments(pool, schemaName, meetingId)
+}
+
 module.exports = {
     getUserById,
     getUserByEmail,
@@ -94,4 +106,7 @@ module.exports = {
     getClubMembersWithRole,
     getClubMemberCount,
     getClubMeetings,
+    saveClubMeetingComment,
+    getClubMeetingComments,
+    getClubMeetingById
 }

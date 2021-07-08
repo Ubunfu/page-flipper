@@ -33,21 +33,21 @@
                 <div class="club-meta-sec-title">Member Count: {{memberCount}}</div>
             </div>
             {{#if isRequesterAdmin}}
-            <div class="club-meta-sec admin-tools">
-                <div class="club-meta-sec-title">Admin Tools:</div>
-                <div class="buttons">
-                    <div class="button-link">
-                        <a href="/club/{{club.clubId}}/edit">
-                            <div class="button">Edit Club</div>
-                        </a>
-                    </div>
-                    <div class="button-link">
-                        <a href="/club/{{club.clubId}}/scheduleMeeting">
-                            <div class="button">Schedule Meeting</div>
-                        </a>
+                <div class="club-meta-sec admin-tools">
+                    <div class="club-meta-sec-title">Admin Tools:</div>
+                    <div class="buttons">
+                        <div class="button-link">
+                            <a href="/club/{{club.clubId}}/edit">
+                                <div class="button">Edit Club</div>
+                            </a>
+                        </div>
+                        <div class="button-link">
+                            <a href="/club/{{club.clubId}}/scheduleMeeting">
+                                <div class="button">Schedule Meeting</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             {{/if}}
         </div>
         <div class="club-timeline">
@@ -55,7 +55,7 @@
                 Club Meetings
             </div>
             {{#each meetings }}
-                <a href="/meeting/{{meetingId}}">
+                <a href="/club/{{clubId}}/meeting/{{meetingId}}">
                     <div class="club-meeting">
                         <div class="book-icon">
                             <img src="{{bookIconUrl}}" alt="">

@@ -21,7 +21,7 @@ header .logout {
 }
 
 header .logout-button {
-    background-color: #282;
+    background-color: rgb(34, 136, 34);
     padding: 10px;
     margin: 0 5px;
     border-radius: 10px;
@@ -150,26 +150,56 @@ body a {
     max-width: 400px;
 }
 
-.nav-main {
-    font-size: 20px;
-    padding: 16px 0;
+/*
+    Shared styling for any navigation bars
+*/
+.nav-bar {
     display: flex;
     text-align: center;
-    max-width: 60%;
     margin: 0 auto;
 }
 
-.nav-main a {
+.nav-bar a {
     flex: auto;
-    padding: 16px 0;
 }
 
-.nav-main a:hover {
+.nav-bar a:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.nav-main a:active {
+.nav-bar a:active {
     background-color: rgba(0, 0, 0, 0.15);
+}
+
+/*
+    Styles for the main navigation bar
+*/
+.nav-main {
+    font-size: 20px;
+    padding: 16px 0;
+    max-width: 60%;
+}
+
+.nav-main a {
+    padding: 16px 0;
+}
+
+/*
+    Syles for meeting navigation bar
+*/
+
+.nav-meeting {
+    font-size: 18px;
+    border-bottom: 1px solid #444;
+}
+
+.nav-meeting a {
+    padding: 8px 0;
+}
+
+.nav-active {
+    border-top: 1px solid #444;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .main-content {
@@ -388,10 +418,17 @@ body a {
     flex: 3;
 }
 
-.club-home .club-timeline .timeline-heading {
+.club-home .club-timeline .timeline-heading,
+.content-heading {
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
+}
+
+.content-subheading {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 /* 
@@ -460,4 +497,143 @@ body a {
 .club-edit-content .club-data .club-edit-field textarea {
     flex: 3;
     height: 200px;
+}
+
+/*
+    Styling for the Club Meeting page
+*/
+.club-meeting {
+    display: flex;
+    max-width: 1000px;
+}
+
+.club-meeting .club-meta-col {
+    flex: 1;
+    border-right: 1px solid #444;
+    margin-right: 25px;
+    padding: 5px;
+}
+
+.club-meeting .meeting-content {
+    flex: 3;
+}
+
+/* 
+    Gives sections a visible divider and some spacing
+ */
+.club-meeting .club-meta-sec {
+    padding: 15px 5px;
+    border-top: 1px solid #444;
+}
+
+.club-meeting .club-icon {
+    margin: auto;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.club-meeting .club-icon img {
+    max-width: 200px;
+}
+
+.club-meeting .club-title {
+    padding: 10px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+ /* 
+    Sub-titles within a club meta-section
+*/
+.club-meeting .club-meta-sec-title {
+    font-size: 18px;
+}
+
+.club-meeting .meeting-desc {
+    text-align: center;
+}
+
+.club-meeting .club-meta-col .club-admins ul {
+list-style: none;
+}
+
+/* 
+    Container around the button links, allowing them to flex vertically
+*/
+.club-meeting .club-meta-col .admin-tools .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+/* 
+    Container around the buttons within the links, allowing the divs
+    to stretch horizontally 
+*/
+.club-meeting .club-meta-col .admin-tools .buttons .button-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.club-meeting .club-meta-col .admin-tools .button {
+    background-color: #060;
+    padding: 10px;
+    margin: 2px 0;
+    border-radius: 10px;
+    color: white;
+}
+
+/*
+    Styles for the club meeting discussions
+*/
+.discussion-post-comment {
+    padding: 5px 0;
+}
+
+.discussion-post-comment form {
+    display: flex;
+}
+
+.discussion-post-comment form input {
+    flex: 5;
+}
+
+.discussion-post-comment form button {
+    flex: 1;
+}
+
+.meeting-discussion {
+    padding: 12px;
+    background-color: rgb(255, 245, 233);
+}
+
+.empty-comment {
+    text-align: center;
+    font-weight: bold;
+}
+
+.meeting-comment {
+    padding: 10px;
+}
+
+.meeting-comment .comment-tag {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.meeting-comment .comment-tag .handle {
+    flex: 4;
+    text-align: left;
+    font-weight: bold;
+}
+
+.meeting-comment .comment-tag .timestamp {
+    flex: 1;
+    text-align: right;
+    color: #777;
 }
