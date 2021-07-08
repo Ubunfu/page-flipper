@@ -77,6 +77,30 @@ CREATE TABLE pf.club_meeting
 ALTER TABLE pf.club_meeting
     OWNER to postgres;
 
+-- CLUB_MEETING_COMMENT TABLE
+CREATE TABLE pf.club_meeting_comment
+(
+    "commentId" character varying(21) NOT NULL,
+    "meetingId" character varying(21) NOT NULL,
+    "userId" character varying(21) NOT NULL,
+    "commentTimestamp" int NOT NULL,
+    "comment" character varying(4096) NOT NULL,
+    PRIMARY KEY ("commentId"),
+    CONSTRAINT "CLUB_MEETING_COMMENT_FK_1" FOREIGN KEY ("userId")
+        REFERENCES pf.user ("userId") MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT "CLUB_MEETING_COMMENT_FK_2" FOREIGN KEY ("meetingId")
+        REFERENCES pf.club_meeting ("meetingId") MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
+);
+
+ALTER TABLE pf.club_meeting_comment
+    OWNER to postgres;
+
 -- BOOK_REVIEW TABLE
 CREATE TABLE pf.book_review
 (
