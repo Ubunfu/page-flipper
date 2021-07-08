@@ -13,4 +13,4 @@ I like [semantic versioning](https://semver.org/), so this project conforms to i
 * [feature] [Adding club detail page](https://github.com/Ubunfu/page-flipper/pull/15)
 * [feature] [Adding Logout button](https://github.com/Ubunfu/page-flipper/pull/22)
 * [feature] [Adding club meeting page](https://github.com/Ubunfu/page-flipper/pull/23)
-* [feature] [Allow scheduling club meetings](https://github.com/Ubunfu/page-flipper/pull/)
+* [feature] [Allow scheduling club meetings](https://github.com/Ubunfu/page-flipper/pull/28)
